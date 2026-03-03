@@ -1,21 +1,28 @@
+import { useState } from "react";
 import Header from "@/components/landing/Header";
 import Hero from "@/components/landing/Hero";
 import ProblemSolution from "@/components/landing/ProblemSolution";
 import Services from "@/components/landing/Services";
 import HowWeWork from "@/components/landing/HowWeWork";
+import ContactSection from "@/components/landing/ContactSection";
 import CTABanner from "@/components/landing/CTABanner";
 import Footer from "@/components/landing/Footer";
+import ContactModal from "@/components/landing/ContactModal";
 
 const Index = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-background">
-      <Header />
-      <Hero />
+      <Header onCtaClick={() => setModalOpen(true)} />
+      <Hero onCtaClick={() => setModalOpen(true)} />
       <ProblemSolution />
       <Services />
       <HowWeWork />
-      <CTABanner />
+      <ContactSection />
+      <CTABanner onCtaClick={() => setModalOpen(true)} />
       <Footer />
+      <ContactModal open={modalOpen} onOpenChange={setModalOpen} />
     </div>
   );
 };

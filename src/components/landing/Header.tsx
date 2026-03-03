@@ -9,7 +9,7 @@ const navLinks = [
   { label: "Beneficios", href: "#beneficios" },
 ];
 
-const Header = () => {
+const Header = ({ onCtaClick }: { onCtaClick?: () => void }) => {
   const [open, setOpen] = useState(false);
 
   const scrollTo = (href: string) => {
@@ -36,7 +36,7 @@ const Header = () => {
         </nav>
 
         <div className="hidden md:block">
-          <Button size="sm" onClick={() => scrollTo("#cta")}>
+          <Button size="sm" onClick={onCtaClick}>
             Agenda una auditoría gratuita
           </Button>
         </div>
@@ -64,7 +64,7 @@ const Header = () => {
                 {l.label}
               </button>
             ))}
-            <Button size="sm" onClick={() => scrollTo("#cta")} className="w-full">
+            <Button size="sm" onClick={() => { setOpen(false); onCtaClick?.(); }} className="w-full">
               Agenda una auditoría gratuita
             </Button>
           </div>

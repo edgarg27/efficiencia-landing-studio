@@ -2,7 +2,7 @@ import { ArrowRight, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ScrollReveal from "@/components/ScrollReveal";
 
-const Hero = () => {
+const Hero = ({ onCtaClick }: { onCtaClick?: () => void }) => {
   return (
     <section className="relative overflow-hidden pt-28 md:pt-36 pb-16 md:pb-24 bg-surface">
       {/* Decorative blobs */}
@@ -29,7 +29,7 @@ const Hero = () => {
               </p>
 
               <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="gap-2" onClick={() => document.querySelector("#cta")?.scrollIntoView({ behavior: "smooth" })}>
+                <Button size="lg" className="gap-2" onClick={onCtaClick}>
                   Comienza a automatizar
                   <ArrowRight size={18} />
                 </Button>
