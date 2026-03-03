@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ScrollReveal from "@/components/ScrollReveal";
 
-const CTABanner = () => (
+const CTABanner = ({ onCtaClick }: { onCtaClick?: () => void }) => (
   <section id="cta" className="section-padding bg-foreground relative overflow-hidden">
     {/* Glow */}
     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-primary/20 rounded-full blur-3xl pointer-events-none" />
@@ -18,6 +18,7 @@ const CTABanner = () => (
         <Button
           size="lg"
           className="gap-2 text-base px-8"
+          onClick={onCtaClick}
         >
           Agenda tu auditoría gratuita
           <ArrowRight size={18} />
