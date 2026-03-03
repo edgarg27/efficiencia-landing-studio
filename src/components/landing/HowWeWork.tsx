@@ -50,7 +50,7 @@ const HowWeWork = () => (
                 Paso {step.num}
               </span>
               <h3 className="text-xl font-bold text-foreground mb-3">{step.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed max-w-xs mx-auto">
+              <p className="text-base text-muted-foreground leading-relaxed max-w-xs mx-auto">
                 {step.desc}
               </p>
             </div>

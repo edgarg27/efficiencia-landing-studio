@@ -46,7 +46,7 @@ const Services = () => (
                 <s.icon size={24} className="text-primary" />
               </div>
               <h3 className="text-lg font-bold text-foreground mb-2">{s.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+              <p className="text-base text-muted-foreground leading-relaxed">{s.desc}</p>
             </div>
           </ScrollReveal>
         ))}

@@ -30,7 +30,7 @@ const ProblemSolution = () => (
       <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
         {/* Before */}
         <ScrollReveal>
-          <div className="rounded-2xl border border-destructive/20 bg-destructive/5 p-6 md:p-8">
+          <div className="rounded-2xl border border-destructive/20 bg-destructive/10 p-6 md:p-8">
             <h3 className="text-lg font-bold text-destructive mb-6 flex items-center gap-2">
               <span className="w-8 h-8 rounded-full bg-destructive/10 flex items-center justify-center">✗</span>
               Sin automatización
