@@ -2,7 +2,7 @@ import { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2, CheckCircle2, Send } from "lucide-react";
+import { Loader2, CheckCircle2, Send, CircleX, } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -12,8 +12,11 @@ import ScrollReveal from "@/components/ScrollReveal";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "El nombre es obligatorio").max(100),
+  number: z.string()
+    .regex(/^\d+$/, "Solo se permiten números") // Verifica que solo sean dígitos
+    .length(10, "El número debe tener exactamente 10 dígitos"), // Fuerza que sean exactamente 10
   email: z.string().trim().email("Ingresa un correo válido").max(255),
-  company: z.string().trim().min(1, "El nombre de la empresa es obligatorio").max(100),
+  company: z.string().trim().max(100).optional(),
   message: z.string().trim().max(1000).optional(),
 });
 
@@ -26,19 +29,38 @@ interface ContactFormProps {
 const ContactForm = ({ onSuccess }: ContactFormProps) => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
-    defaultValues: { name: "", email: "", company: "", message: "" },
+    defaultValues: { name: "", number: "", email: "", company: "", message: "" },
   });
 
   const handleSubmit = async (data: ContactFormValues) => {
     setLoading(true);
-    // Simulate API call
-    await new Promise((r) => setTimeout(r, 1500));
+
+    try {
+      const respuesta = await fetch(import.meta.env.VITE_N8N_WEBHOOK_URL, {
+        method: 'POST', // Indicamos que queremos ENVIAR información
+        headers: {
+          'Content-Type': 'application/json', // Le decimos a n8n que le enviamos un formato JSON
+        },
+        body: JSON.stringify(data) // Convertimos nuestros datos a texto para el viaje
+      });
+
+      if (!respuesta.ok) {
+        setHasError(true);
+        return;
+      }
+
+      setSubmitted(true);
+      onSuccess?.();
+
+    } catch (error) {
+      setHasError(true);
+    }
+
     setLoading(false);
-    setSubmitted(true);
-    onSuccess?.();
   };
 
   if (submitted) {
@@ -50,6 +72,19 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
         <h3 className="text-xl font-bold text-foreground">¡Gracias!</h3>
         <p className="text-muted-foreground max-w-sm">
           Un experto en IA analizará tu caso y te contactará pronto.
+        </p>
+      </div>
+    );
+  }
+  if (hasError) {
+    return (
+      <div className="flex flex-col items-center justify-center py-12 text-center gap-4 animate-fade-in">
+        <div className="w-16 h-16 rounded-full bg-destructive/10 flex items-center justify-center">
+          <CircleX className="w-8 h-8 text-destructive" />
+        </div>
+        <h3 className="text-xl font-bold text-foreground">!Error de conexión!</h3>
+        <p className="text-muted-foreground max-w-sm">
+          No pudimos comunicarnos con el servidor. Por favor, intenta de nuevo más tarde.
         </p>
       </div>
     );
@@ -66,6 +101,31 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
               <FormLabel>Nombre completo</FormLabel>
               <FormControl>
                 <Input placeholder="Juan Pérez" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="number"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Numero de telefono</FormLabel>
+              <FormControl>
+                <Input
+                  type="tel"
+                  placeholder="Tu numero de telefono"
+                  {...field}
+                onChange={(evento) => {
+                  let valor = evento.target.value;
+                  valor = valor.replace(/\D/g, "");
+                  if (valor.length > 10) {
+                    valor = valor.slice(0, 10);
+                  }
+                  field.onChange(valor);
+                }}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
