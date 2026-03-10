@@ -40,12 +40,12 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
     setLoading(true);
 
     try {
-      const respuesta = await fetch(import.meta.env.VITE_N8N_WEBHOOK_URL, {
-        method: 'POST', // Indicamos que queremos ENVIAR información
+      const respuesta = await fetch('/api/webhook', {
+        method: 'POST',
         headers: {
-          'Content-Type': 'application/json', // Le decimos a n8n que le enviamos un formato JSON
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data) // Convertimos nuestros datos a texto para el viaje
+        body: JSON.stringify(data)
       });
 
       if (!respuesta.ok) {
@@ -117,14 +117,14 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
                   type="tel"
                   placeholder="Tu numero de telefono"
                   {...field}
-                onChange={(evento) => {
-                  let valor = evento.target.value;
-                  valor = valor.replace(/\D/g, "");
-                  if (valor.length > 10) {
-                    valor = valor.slice(0, 10);
-                  }
-                  field.onChange(valor);
-                }}
+                  onChange={(evento) => {
+                    let valor = evento.target.value;
+                    valor = valor.replace(/\D/g, "");
+                    if (valor.length > 10) {
+                      valor = valor.slice(0, 10);
+                    }
+                    field.onChange(valor);
+                  }}
                 />
               </FormControl>
               <FormMessage />
