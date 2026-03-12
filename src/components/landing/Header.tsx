@@ -4,9 +4,9 @@ import { Button } from "@/components/ui/button";
 import BrandLogo from "@/components/BrandLogo";
 
 const navLinks = [
+  { label: "Beneficios", href: "#beneficios" },
   { label: "Servicios", href: "#servicios" },
   { label: "Cómo funciona", href: "#como-funciona" },
-  { label: "Beneficios", href: "#beneficios" },
 ];
 
 const Header = ({ onCtaClick }: { onCtaClick?: () => void }) => {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -34,6 +34,8 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
+
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
@@ -72,6 +74,9 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
       setSubmitted(true);
       onSuccess?.();
 
+      form.reset();
+      recaptchaRef.current?.reset();
+
     } catch (error) {
       setHasError(true);
     }
@@ -108,7 +113,7 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-5">
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="mt-4 grid grid-cols-1 gap-2 md:gap-6 md:grid-cols-2">
         <FormField
           control={form.control}
           name="name"
@@ -177,7 +182,7 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
           control={form.control}
           name="message"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="md:col-span-2">
               <FormLabel>¿Qué proceso manual te gustaría automatizar?</FormLabel>
               <FormControl>
                 <Textarea
@@ -194,8 +199,9 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
           control={form.control}
           name="captchaToken"
           render={({ field }) => (
-            <FormItem className="flex flex-col items-center justify-center my-4 relative z-50 pointer-events-auto isolate">
+            <FormItem className="flex flex-col items-center justify-center my-4 relative z-50 pointer-events-auto isolate md:col-span-2">
               <ReCAPTCHA
+                ref={recaptchaRef}
                 sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
                 onChange={(token) => {
                   field.onChange(token || "");
@@ -205,7 +211,7 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full gap-2 text-base h-12" disabled={loading}>
+        <Button type="submit" className="w-full gap-2 text-base h-12 md:col-span-2" disabled={loading}>
           {loading ? (
             <>
               <Loader2 className="w-4 h-4 animate-spin" />
@@ -218,7 +224,7 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
             </>
           )}
         </Button>
-        <p className="text-xs text-muted-foreground text-center mt-2">
+        <p className="text-xs text-muted-foreground text-center mt-2 md:col-span-2">
           🔒 Tus datos están seguros. Cero spam.
         </p>
       </form>
