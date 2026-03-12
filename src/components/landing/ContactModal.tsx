@@ -8,7 +8,10 @@ interface ContactModalProps {
 
 const ContactModal = ({ open, onOpenChange }: ContactModalProps) => (
   <Dialog open={open} onOpenChange={onOpenChange}>
-    <DialogContent className="sm:max-w-lg">
+    <DialogContent
+      className="sm:max-w-lg"
+      onInteractOutside={(e) => e.preventDefault()}
+    >
       <DialogHeader>
         <DialogTitle className="text-xl font-bold">
           Agenda tu auditoría <span className="text-brand-ia">gratuita</span>

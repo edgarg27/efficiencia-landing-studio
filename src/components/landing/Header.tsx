@@ -18,7 +18,7 @@ const Header = ({ onCtaClick }: { onCtaClick?: () => void }) => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border/50">
+    <header className="fixed top-0 left-0 right-0 z-40 bg-background/80 backdrop-blur-lg border-b border-border/50">
       <div className="section-container flex items-center justify-between h-16 md:h-20">
         <BrandLogo />
 

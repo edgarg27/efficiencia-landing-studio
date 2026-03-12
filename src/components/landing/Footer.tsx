@@ -1,5 +1,5 @@
 import BrandLogo from "@/components/BrandLogo";
-import { Linkedin, Twitter, Mail } from "lucide-react";
+import { redesSociales } from "../SocialIcons";
 
 const Footer = () => (
   <footer className="bg-surface border-t border-border py-12">
@@ -24,21 +24,23 @@ const Footer = () => (
         <div>
           <h4 className="text-sm font-bold text-foreground mb-3">Contacto</h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
-            <li>hola@efficiencia.com</li>
-            <li>+1 (555) 123-4567</li>
+            <li>efficiencia22@gmail.com</li>
+            {/* <li>+52 (449) 514-8888</li> */}
           </ul>
         </div>
 
         <div>
           <h4 className="text-sm font-bold text-foreground mb-3">Síguenos</h4>
           <div className="flex gap-3">
-            {[Linkedin, Twitter, Mail].map((Icon, i) => (
+            {redesSociales.map((red, i) => (
               <a
                 key={i}
-                href="#"
+                href={red.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-9 h-9 rounded-lg bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 transition-all"
               >
-                <Icon size={16} />
+                <red.Icon className={"w-4 h-4"} />
               </a>
             ))}
           </div>

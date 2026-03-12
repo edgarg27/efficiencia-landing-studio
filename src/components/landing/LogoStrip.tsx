@@ -1,6 +1,6 @@
 import ScrollReveal from "@/components/ScrollReveal";
 
-const logos = ["TechCorp", "DataFlow", "Nexus AI", "CloudBase", "AutoSys"];
+const logos = ["Nodus Flex Center"];
 
 const LogoStrip = () => (
   <section className="py-10 md:py-14 bg-background border-b border-border/50">

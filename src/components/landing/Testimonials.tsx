@@ -4,23 +4,23 @@ import ScrollReveal from "@/components/ScrollReveal";
 
 const testimonials = [
   {
-    name: "María García",
-    role: "Directora de Operaciones, LogiTech",
-    initials: "MG",
-    quote: "Redujimos el tiempo de reportes manuales en un 40%. El equipo ahora se enfoca en análisis estratégico.",
+    name: "Gerardo",
+    role: "CEO, Nodus Flex Center",
+    initials: "G",
+    quote: "Redujimos el tiempo de respuesta de mensajes en un 40%. El equipo ahora se enfoca en análisis estratégico.",
   },
   {
-    name: "Carlos Mendoza",
-    role: "CEO, DataFlow Solutions",
-    initials: "CM",
+    name: "Maribel",
+    role: "Coordinadora, Nodus Flex Center",
+    initials: "M",
     quote: "La automatización de facturación nos ahorró 120 horas al mes. El ROI fue visible desde el primer trimestre.",
   },
-  {
-    name: "Ana Rodríguez",
-    role: "Gerente de TI, NovaTech",
-    initials: "AR",
-    quote: "Integraron nuestros 5 sistemas en una sola plataforma. Los errores de datos cayeron un 95%.",
-  },
+  // {
+  //   name: "Ana Rodríguez",
+  //   role: "Gerente de TI, NovaTech",
+  //   initials: "AR",
+  //   quote: "Integraron nuestros 5 sistemas en una sola plataforma. Los errores de datos cayeron un 95%.",
+  // },
 ];
 
 const Testimonials = () => (

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,6 +10,8 @@ import { Button } from "@/components/ui/button";
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import ScrollReveal from "@/components/ScrollReveal";
 
+import ReCAPTCHA from "react-google-recaptcha";
+
 const contactSchema = z.object({
   name: z.string().trim().min(1, "El nombre es obligatorio").max(100),
   number: z.string()
@@ -17,7 +19,9 @@ const contactSchema = z.object({
     .length(10, "El número debe tener exactamente 10 dígitos"), // Fuerza que sean exactamente 10
   email: z.string().trim().email("Ingresa un correo válido").max(255),
   company: z.string().trim().max(100).optional(),
-  message: z.string().trim().max(1000).optional(),
+  message: z.string().trim().min(1, "El mensaje es obligatorio").max(1000),
+
+  captchaToken: z.string().min(1, "Por favor, verifica que no eres un robot"),
 });
 
 type ContactFormValues = z.infer<typeof contactSchema>;
@@ -33,19 +37,31 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
-    defaultValues: { name: "", number: "", email: "", company: "", message: "" },
+    defaultValues: { name: "", number: "", email: "", company: "", message: "", captchaToken: "", },
   });
+
+  // Cada vez que cambien los errores, los guardamos y les ponemos timeout
+  useEffect(() => {
+    if (Object.keys(form.formState.errors).length > 0) {
+      const timer = setTimeout(() => form.clearErrors(), 3000); // borra todos los errores
+      return () => clearTimeout(timer);
+    }
+  }, [form.formState.errors]);
 
   const handleSubmit = async (data: ContactFormValues) => {
     setLoading(true);
 
     try {
+
       const respuesta = await fetch('/api/webhook', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify({
+          ...data,
+          token: data.captchaToken // <- Agregamos esto para el Backend
+        })
       });
 
       if (!respuesta.ok) {
@@ -170,6 +186,21 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="captchaToken"
+          render={({ field }) => (
+            <FormItem className="flex flex-col items-center justify-center my-4 relative z-50 pointer-events-auto isolate">
+              <ReCAPTCHA
+                sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                onChange={(token) => {
+                  field.onChange(token || "");
+                }}
+              />
               <FormMessage />
             </FormItem>
           )}

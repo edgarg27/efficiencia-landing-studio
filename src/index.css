@@ -93,7 +93,12 @@
     @apply bg-background text-foreground font-sans antialiased;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-display tracking-tight;
   }
 }
@@ -120,4 +125,9 @@
   .hover-lift {
     @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
   }
+}
+
+/* Permite dar clic en el reCAPTCHA de Google aunque el Modal de shadcn bloquee el fondo */
+body[data-scroll-locked="1"] {
+  pointer-events: auto !important;
 }
