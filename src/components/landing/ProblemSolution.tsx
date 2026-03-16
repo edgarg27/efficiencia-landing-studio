@@ -39,7 +39,7 @@ const ProblemSolution = () => (
               {before.map((item, i) => (
                 <div key={i} className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-lg bg-destructive/10 flex items-center justify-center shrink-0">
-                    <item.icon size={20} className={item.color} />
+                    <item.icon size={20} className={item.color} aria-hidden="true" />
                   </div>
                   <p className="text-foreground font-medium pt-2">{item.label}</p>
                 </div>
@@ -59,7 +59,7 @@ const ProblemSolution = () => (
               {after.map((item, i) => (
                 <div key={i} className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                    <item.icon size={20} className={item.color} />
+                    <item.icon size={20} className={item.color} aria-hidden="true" />
                   </div>
                   <p className="text-foreground font-medium pt-2">{item.label}</p>
                 </div>

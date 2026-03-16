@@ -14,15 +14,15 @@ const Hero = ({ onCtaClick }: { onCtaClick?: () => void }) => {
           {/* Copy */}
           <ScrollReveal>
             <div className="max-w-xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full bg-primary/10 text-primary text-xs font-semibold tracking-wide uppercase">
+              <h1 className="inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full bg-primary/10 text-primary text-xs font-semibold tracking-wide uppercase">
                 <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                Automatización con IA
-              </div>
+                Automatización Empresarial con IA
+              </h1>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-6 text-foreground">
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-6 text-foreground">
                 Elimina las tareas repetitivas. Multiplica tu{" "}
                 <span className="text-brand-ia">EfficiencIA</span>.
-              </h1>
+              </h2>
 
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
                 Automatizamos los procesos de tu empresa utilizando Inteligencia Artificial para que tu equipo se enfoque en lo que realmente importa: <strong className="text-foreground">crecer</strong>.
@@ -31,10 +31,10 @@ const Hero = ({ onCtaClick }: { onCtaClick?: () => void }) => {
               <div className="flex flex-wrap gap-4">
                 <Button size="lg" className="gap-2" onClick={onCtaClick}>
                   Comienza a automatizar
-                  <ArrowRight size={18} />
+                  <ArrowRight size={18} aria-hidden="true" />
                 </Button>
                 <Button size="lg" variant="outline" className="gap-2" onClick={() => document.querySelector("#beneficios")?.scrollIntoView({ behavior: "smooth" })}>
-                  <Play size={16} />
+                  <Play size={16} aria-hidden="true" />
                   Ver casos de éxito
                 </Button>
               </div>

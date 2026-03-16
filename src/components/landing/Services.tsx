@@ -43,7 +43,7 @@ const Services = () => (
           <ScrollReveal key={i} delay={i * 100}>
             <div className="group bg-card rounded-2xl border border-border p-6 hover-lift cursor-default h-full">
               <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
-                <s.icon size={24} className="text-primary" />
+                <s.icon size={24} className="text-primary" aria-hidden="true" />
               </div>
               <h3 className="text-lg font-bold text-foreground mb-2">{s.title}</h3>
               <p className="text-base text-muted-foreground leading-relaxed">{s.desc}</p>

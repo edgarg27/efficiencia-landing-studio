@@ -40,7 +40,7 @@ const Footer = () => (
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-lg bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 transition-all"
               >
-                <red.Icon className={"w-4 h-4"} />
+                <red.Icon className={"w-4 h-4"} aria-hidden="true" />
               </a>
             ))}
           </div>

@@ -44,7 +44,7 @@ const HowWeWork = () => (
           <ScrollReveal key={i} delay={i * 150}>
             <div className="relative text-center">
               <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-5 relative z-10 border-4 border-background">
-                <step.icon size={24} className="text-primary" />
+                <step.icon size={24} className="text-primary" aria-hidden="true" />
               </div>
               <span className="text-xs font-bold text-primary tracking-widest uppercase mb-2 block">
                 Paso {step.num}

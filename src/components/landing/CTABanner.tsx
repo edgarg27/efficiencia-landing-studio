@@ -21,7 +21,7 @@ const CTABanner = ({ onCtaClick }: { onCtaClick?: () => void }) => (
           onClick={onCtaClick}
         >
           Agenda tu auditoría gratuita
-          <ArrowRight size={18} />
+          <ArrowRight size={18} aria-hidden="true" />
         </Button>
       </ScrollReveal>
     </div>

@@ -220,7 +220,7 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
           ) : (
             <>
               Solicitar asesoría gratuita
-              <Send className="w-4 h-4" />
+              <Send className="w-4 h-4" aria-hidden="true" />
             </>
           )}
         </Button>
