@@ -40,14 +40,17 @@ const FacebookIcon = (props: any) => (
 export const redesSociales = [
     {
         Icon: TiktokIcon,
-        url: "https://www.tiktok.com/@efficiencia?_r=1&_t=ZS-94ZvlwjmtvO" // Cambia esto por tu link real
+        url: "https://www.tiktok.com/@efficiencia?_r=1&_t=ZS-94ZvlwjmtvO", // Cambia esto por tu link real
+        ariaLabel: "Visitar nuestro perfil de TikTok"
     },
     {
         Icon: InstagramIcon,
-        url: "https://www.instagram.com/efficiencia22/?e=42b9599f-a949-4945-b5b6-20e9b254e0f6&g=5" // Cambia esto por tu link real
+        url: "https://www.instagram.com/efficiencia22/?e=42b9599f-a949-4945-b5b6-20e9b254e0f6&g=5", // Cambia esto por tu link real
+        ariaLabel: "Visitar nuestro perfil de Instagram"
     },
     {
         Icon: FacebookIcon,
-        url: "https://www.facebook.com/profile.php?id=61587188300318" // Cambia esto por tu link real
+        url: "https://www.facebook.com/profile.php?id=61587188300318", // Cambia esto por tu link real
+        ariaLabel: "Visitar nuestro perfil de Facebook"
     }
 ];

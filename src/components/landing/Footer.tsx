@@ -17,7 +17,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-sm font-bold text-foreground mb-3">{t("footer.navTitle")}</h4>
+            <h3 className="text-sm font-bold text-foreground mb-3">{t("footer.navTitle")}</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><a href="#beneficios" className="hover:text-foreground transition-colors">{t("footer.nav.benefits")}</a></li>
               <li><a href="#servicios" className="hover:text-foreground transition-colors">{t("footer.nav.services")}</a></li>
@@ -26,7 +26,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-sm font-bold text-foreground mb-3">{t("footer.contactTitle")}</h4>
+            <h3 className="text-sm font-bold text-foreground mb-3">{t("footer.contactTitle")}</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>efficiencia22@gmail.com</li>
               {/* <li>+52 (449) 514-8888</li> */}
@@ -34,7 +34,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-sm font-bold text-foreground mb-3">{t("footer.socialTitle")}</h4>
+            <h3 className="text-sm font-bold text-foreground mb-3">{t("footer.socialTitle")}</h3>
             <div className="flex gap-3">
               {redesSociales.map((red, i) => (
                 <a
@@ -43,6 +43,7 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-9 h-9 rounded-lg bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 transition-all"
+                  aria-label={red.ariaLabel}
                 >
                   <red.Icon className={"w-4 h-4"} aria-hidden="true" />
                 </a>

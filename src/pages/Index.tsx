@@ -19,7 +19,7 @@ const Index = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background">
       {/* Componentes de carga inmediata */}
       <Header onCtaClick={() => setModalOpen(true)} />
       <Hero onCtaClick={() => setModalOpen(true)} />
@@ -36,7 +36,7 @@ const Index = () => {
         <Footer />
         <ContactModal open={modalOpen} onOpenChange={setModalOpen} />
       </Suspense>
-    </div>
+    </main>
   );
 };
 
