@@ -1,6 +1,5 @@
 import { ArrowRight, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import ScrollReveal from "@/components/ScrollReveal";
 import { useTranslation, Trans } from "react-i18next";
 
 const Hero = ({ onCtaClick }: { onCtaClick?: () => void }) => {
@@ -14,45 +13,45 @@ const Hero = ({ onCtaClick }: { onCtaClick?: () => void }) => {
 
       <div className="section-container relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Copy */}
-          <ScrollReveal>
-            <div className="max-w-xl">
-              <h1 className="inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full bg-primary/10 text-primary text-xs font-semibold tracking-wide uppercase">
-                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                {t("hero.badge")}
-              </h1>
 
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-6 text-foreground">
-                <Trans
-                  i18nKey="hero.title"
-                  components={{ 1: <span className="text-brand-ia" /> }}
-                />
-              </h2>
+          {/* Copy - Eliminamos ScrollReveal para que cargue al instante */}
+          <div className="max-w-xl animate-in fade-in duration-700">
+            <h1 className="inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full bg-primary/10 text-primary text-xs font-semibold tracking-wide uppercase">
+              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+              {t("hero.badge")}
+            </h1>
 
-              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                <Trans
-                  i18nKey="hero.description"
-                  components={{ 1: <strong className="text-foreground" /> }}
-                />
-              </p>
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-6 text-foreground">
+              <Trans
+                i18nKey="hero.title"
+                components={{ 1: <span className="text-brand-ia" /> }}
+              />
+            </h2>
 
-              <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="gap-2" onClick={onCtaClick}>
-                  {t("hero.buttons.start")}
-                  <ArrowRight size={18} aria-hidden="true" />
-                </Button>
-                <Button size="lg" variant="outline" className="gap-2" onClick={() => document.querySelector("#beneficios")?.scrollIntoView({ behavior: "smooth" })}>
-                  <Play size={16} aria-hidden="true" />
-                  {t("hero.buttons.cases")}
-                </Button>
-              </div>
+            <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+              <Trans
+                i18nKey="hero.description"
+                components={{ 1: <strong className="text-foreground" /> }}
+              />
+            </p>
+
+            <div className="flex flex-wrap gap-4">
+              <Button size="lg" className="gap-2" onClick={onCtaClick}>
+                {t("hero.buttons.start")}
+                <ArrowRight size={18} aria-hidden="true" />
+              </Button>
+              <Button size="lg" variant="outline" className="gap-2" onClick={() => document.querySelector("#beneficios")?.scrollIntoView({ behavior: "smooth" })}>
+                <Play size={16} aria-hidden="true" />
+                {t("hero.buttons.cases")}
+              </Button>
             </div>
-          </ScrollReveal>
+          </div>
 
-          {/* Visual */}
-          <ScrollReveal delay={200}>
+          {/* Visual - Eliminamos ScrollReveal */}
+          <div className="animate-in fade-in duration-1000 delay-200">
             <HeroVisual />
-          </ScrollReveal>
+          </div>
+
         </div>
       </div>
     </section>
@@ -89,7 +88,7 @@ const HeroVisual = () => {
               </div>
               <div className="w-full h-2 bg-border rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-primary rounded-full transition-all duration-1000"
+                  className="h-full bg-primary rounded-full transition-all duration-1000 ease-out"
                   style={{ width: `${item.pct}%` }}
                 />
               </div>
