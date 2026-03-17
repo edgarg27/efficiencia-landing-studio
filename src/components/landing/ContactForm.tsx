@@ -1,41 +1,44 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2, CheckCircle2, Send, CircleX, } from "lucide-react";
+import { Loader2, CheckCircle2, Send, CircleX } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import ScrollReveal from "@/components/ScrollReveal";
-
 import ReCAPTCHA from "react-google-recaptcha";
+import { useTranslation } from "react-i18next";
+import { TFunction } from "i18next";
 
-const contactSchema = z.object({
-  name: z.string().trim().min(1, "El nombre es obligatorio").max(100),
+const getContactSchema = (t: TFunction) => z.object({
+  name: z.string().trim().min(1, t("contactForm.errors.nameRequired")).max(100),
   number: z.string()
-    .regex(/^\d+$/, "Solo se permiten números") // Verifica que solo sean dígitos
-    .length(10, "El número debe tener exactamente 10 dígitos"), // Fuerza que sean exactamente 10
-  email: z.string().trim().email("Ingresa un correo válido").max(255),
+    .regex(/^\d+$/, t("contactForm.errors.numberOnly"))
+    .length(10, t("contactForm.errors.numberLength")),
+  email: z.string().trim().email(t("contactForm.errors.emailInvalid")).max(255),
   company: z.string().trim().max(100).optional(),
-  message: z.string().trim().min(1, "El mensaje es obligatorio").max(1000),
-
-  captchaToken: z.string().min(1, "Por favor, verifica que no eres un robot"),
+  message: z.string().trim().min(1, t("contactForm.errors.messageRequired")).max(1000),
+  captchaToken: z.string().min(1, t("contactForm.errors.captchaRequired")),
 });
 
-type ContactFormValues = z.infer<typeof contactSchema>;
+type ContactFormValues = z.infer<ReturnType<typeof getContactSchema>>;
 
 interface ContactFormProps {
   onSuccess?: () => void;
 }
 
 const ContactForm = ({ onSuccess }: ContactFormProps) => {
+  const { t } = useTranslation();
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
 
   const recaptchaRef = useRef<ReCAPTCHA>(null);
+
+  const contactSchema = useMemo(() => getContactSchema(t), [t]);
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
@@ -48,13 +51,12 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
       const timer = setTimeout(() => form.clearErrors(), 3000); // borra todos los errores
       return () => clearTimeout(timer);
     }
-  }, [form.formState.errors]);
+  }, [form.formState.errors, form]);
 
   const handleSubmit = async (data: ContactFormValues) => {
     setLoading(true);
 
     try {
-
       const respuesta = await fetch('/api/webhook', {
         method: 'POST',
         headers: {
@@ -90,22 +92,23 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
         <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
           <CheckCircle2 className="w-8 h-8 text-primary" />
         </div>
-        <h3 className="text-xl font-bold text-foreground">¡Gracias!</h3>
+        <h3 className="text-xl font-bold text-foreground">{t("contactForm.successTitle")}</h3>
         <p className="text-muted-foreground max-w-sm">
-          Un experto en IA analizará tu caso y te contactará pronto.
+          {t("contactForm.successMessage")}
         </p>
       </div>
     );
   }
+  
   if (hasError) {
     return (
       <div className="flex flex-col items-center justify-center py-12 text-center gap-4 animate-fade-in">
         <div className="w-16 h-16 rounded-full bg-destructive/10 flex items-center justify-center">
           <CircleX className="w-8 h-8 text-destructive" />
         </div>
-        <h3 className="text-xl font-bold text-foreground">!Error de conexión!</h3>
+        <h3 className="text-xl font-bold text-foreground">{t("contactForm.errorTitle")}</h3>
         <p className="text-muted-foreground max-w-sm">
-          No pudimos comunicarnos con el servidor. Por favor, intenta de nuevo más tarde.
+          {t("contactForm.errorMessage")}
         </p>
       </div>
     );
@@ -119,9 +122,9 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Nombre completo</FormLabel>
+              <FormLabel>{t("contactForm.fields.name.label")}</FormLabel>
               <FormControl>
-                <Input placeholder="Juan Pérez" {...field} />
+                <Input placeholder={t("contactForm.fields.name.placeholder")} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -132,11 +135,11 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
           name="number"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Numero de telefono</FormLabel>
+              <FormLabel>{t("contactForm.fields.number.label")}</FormLabel>
               <FormControl>
                 <Input
                   type="tel"
-                  placeholder="Tu numero de telefono"
+                  placeholder={t("contactForm.fields.number.placeholder")}
                   {...field}
                   onChange={(evento) => {
                     let valor = evento.target.value;
@@ -157,9 +160,9 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Correo corporativo</FormLabel>
+              <FormLabel>{t("contactForm.fields.email.label")}</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="juan@empresa.com" {...field} />
+                <Input type="email" placeholder={t("contactForm.fields.email.placeholder")} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -170,9 +173,9 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
           name="company"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Nombre de la empresa</FormLabel>
+              <FormLabel>{t("contactForm.fields.company.label")}</FormLabel>
               <FormControl>
-                <Input placeholder="Empresa S.A." {...field} />
+                <Input placeholder={t("contactForm.fields.company.placeholder")} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -183,10 +186,10 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
           name="message"
           render={({ field }) => (
             <FormItem className="md:col-span-2">
-              <FormLabel>¿Qué proceso manual te gustaría automatizar?</FormLabel>
+              <FormLabel>{t("contactForm.fields.message.label")}</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Describe brevemente el proceso que quieres optimizar..."
+                  placeholder={t("contactForm.fields.message.placeholder")}
                   className="min-h-[100px] resize-none"
                   {...field}
                 />
@@ -215,17 +218,17 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
           {loading ? (
             <>
               <Loader2 className="w-4 h-4 animate-spin" />
-              Enviando...
+              {t("contactForm.buttons.sending")}
             </>
           ) : (
             <>
-              Solicitar asesoría gratuita
+              {t("contactForm.buttons.submit")}
               <Send className="w-4 h-4" aria-hidden="true" />
             </>
           )}
         </Button>
         <p className="text-xs text-muted-foreground text-center mt-2 md:col-span-2">
-          🔒 Tus datos están seguros. Cero spam.
+          {t("contactForm.footerText")}
         </p>
       </form>
     </Form>

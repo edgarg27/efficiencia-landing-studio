@@ -1,20 +1,33 @@
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import BrandLogo from "@/components/BrandLogo";
-
-const navLinks = [
-  { label: "Beneficios", href: "#beneficios" },
-  { label: "Servicios", href: "#servicios" },
-  { label: "Cómo funciona", href: "#como-funciona" },
-];
+import { useTranslation } from "react-i18next";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Header = ({ onCtaClick }: { onCtaClick?: () => void }) => {
+  const { t, i18n } = useTranslation();
   const [open, setOpen] = useState(false);
+
+  const navLinks = [
+    { label: t("header.nav.benefits"), href: "#beneficios" },
+    { label: t("header.nav.services"), href: "#servicios" },
+    { label: t("header.nav.howItWorks"), href: "#como-funciona" },
+  ];
 
   const scrollTo = (href: string) => {
     setOpen(false);
     document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+    setOpen(false);
   };
 
   return (
@@ -35,20 +48,55 @@ const Header = ({ onCtaClick }: { onCtaClick?: () => void }) => {
           ))}
         </nav>
 
-        <div className="hidden md:block">
+        <div className="hidden md:flex items-center gap-4">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon" className="w-9 h-9">
+                <Globe className="h-4 w-4" />
+                <span className="sr-only">Cambiar idioma</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onClick={() => changeLanguage("es")}>
+                Español
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => changeLanguage("en")}>
+                English
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
           <Button size="sm" onClick={onCtaClick}>
-            Agenda una auditoría gratuita
+            {t("header.button")}
           </Button>
         </div>
 
-        {/* Mobile toggle */}
-        <button
-          className="md:hidden p-2 text-foreground"
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
-        >
-          {open ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
-        </button>
+        {/* Mobile toggle & language (for mobile) */}
+        <div className="flex items-center gap-2 md:hidden">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon" className="w-9 h-9">
+                <Globe className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onClick={() => changeLanguage("es")}>
+                Español
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => changeLanguage("en")}>
+                English
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          <button
+            className="p-2 text-foreground"
+            onClick={() => setOpen(!open)}
+            aria-label="Toggle menu"
+          >
+            {open ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
@@ -65,7 +113,7 @@ const Header = ({ onCtaClick }: { onCtaClick?: () => void }) => {
               </button>
             ))}
             <Button size="sm" onClick={() => { setOpen(false); onCtaClick?.(); }} className="w-full">
-              Agenda una auditoría gratuita
+              {t("header.button")}
             </Button>
           </div>
         </div>

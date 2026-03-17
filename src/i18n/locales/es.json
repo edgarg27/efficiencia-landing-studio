@@ -1,1 +1,172 @@
-{}
+{
+  "contactForm": {
+    "successTitle": "¡Gracias!",
+    "successMessage": "Un experto en IA analizará tu caso y te contactará pronto.",
+    "errorTitle": "¡Error de conexión!",
+    "errorMessage": "No pudimos comunicarnos con el servidor. Por favor, intenta de nuevo más tarde.",
+    "fields": {
+      "name": {
+        "label": "Nombre completo",
+        "placeholder": "Juan Pérez"
+      },
+      "number": {
+        "label": "Numero de telefono",
+        "placeholder": "Tu numero de telefono"
+      },
+      "email": {
+        "label": "Correo corporativo",
+        "placeholder": "juan@empresa.com"
+      },
+      "company": {
+        "label": "Nombre de la empresa",
+        "placeholder": "Empresa S.A."
+      },
+      "message": {
+        "label": "¿Qué proceso manual te gustaría automatizar?",
+        "placeholder": "Describe brevemente el proceso que quieres optimizar..."
+      }
+    },
+    "buttons": {
+      "sending": "Enviando...",
+      "submit": "Solicitar asesoría gratuita"
+    },
+    "footerText": "🔒 Tus datos están seguros. Cero spam.",
+    "errors": {
+      "nameRequired": "El nombre es obligatorio",
+      "numberOnly": "Solo se permiten números",
+      "numberLength": "El número debe tener exactamente 10 dígitos",
+      "emailInvalid": "Ingresa un correo válido",
+      "messageRequired": "El mensaje es obligatorio",
+      "captchaRequired": "Por favor, verifica que no eres un robot"
+    }
+  },
+  "contactModal": {
+    "title": "Agenda tu auditoría <1>gratuita</1>",
+    "description": "Completa el formulario y un experto en IA analizará tu caso."
+  },
+  "contactSection": {
+    "title": "Agenda tu auditoría <1>gratuita</1>",
+    "description": "Cuéntanos sobre tu empresa y un experto te contactará para analizar cómo la IA puede optimizar tus procesos."
+  },
+  "ctaBanner": {
+    "title": "¿Listo para transformar el flujo de<1 /> trabajo de tu empresa?",
+    "description": "Agenda una auditoría gratuita y descubre cuánto tiempo y dinero puedes ahorrar con automatización inteligente.",
+    "button": "Agenda tu auditoría gratuita"
+  },
+  "footer": {
+    "description": "Automatización e Inteligencia Artificial para empresas que quieren crecer sin límites.",
+    "navTitle": "Navegación",
+    "nav": {
+      "benefits": "Beneficios",
+      "services": "Servicios",
+      "howItWorks": "Cómo funciona"
+    },
+    "contactTitle": "Contacto",
+    "socialTitle": "Síguenos",
+    "rights": "© {{year}} EfficiencIA. Todos los derechos reservados."
+  },
+  "header": {
+    "nav": {
+      "benefits": "Beneficios",
+      "services": "Servicios",
+      "howItWorks": "Cómo funciona"
+    },
+    "button": "Agenda una auditoría gratuita"
+  },
+  "hero": {
+    "badge": "Automatización Empresarial con IA",
+    "title": "Elimina las tareas repetitivas. Multiplica tu <1>EfficiencIA</1>.",
+    "description": "Automatizamos los procesos de tu empresa utilizando Inteligencia Artificial para que tu equipo se enfoque en lo que realmente importa: <1>crecer</1>.",
+    "buttons": {
+      "start": "Comienza a automatizar",
+      "cases": "Ver casos de éxito"
+    },
+    "visual": {
+      "header": "EfficiencIA Dashboard",
+      "steps": {
+        "step1": "Recepción de datos",
+        "step2": "Procesamiento IA",
+        "step3": "Generación de reportes"
+      },
+      "completed": "✓ Proceso completado — 3.2s"
+    }
+  },
+  "howWeWork": {
+    "title": "Cómo trabajamos",
+    "description": "Un proceso claro y transparente en tres pasos hacia la automatización total.",
+    "stepLabel": "Paso {{num}}",
+    "steps": {
+      "step1": {
+        "title": "Auditoría de Procesos",
+        "desc": "Analizamos tus flujos de trabajo actuales para identificar oportunidades de automatización con el mayor impacto."
+      },
+      "step2": {
+        "title": "Desarrollo e Integración",
+        "desc": "Diseñamos y construimos soluciones personalizadas que se integran perfectamente con tus sistemas existentes."
+      },
+      "step3": {
+        "title": "Despliegue y Optimización",
+        "desc": "Implementamos, monitorizamos y optimizamos continuamente para garantizar resultados crecientes."
+      }
+    }
+  },
+  "logoStrip": {
+    "title": "Empresas que ya multiplicaron su eficiencia"
+  },
+  "problemSolution": {
+    "title": "De procesos lentos a <1>EfficiencIA</1> total",
+    "description": "Descubre cómo la automatización inteligente transforma la operación de tu empresa.",
+    "before": {
+      "title": "Sin automatización",
+      "items": {
+        "item1": "Horas perdidas en tareas manuales",
+        "item2": "Errores humanos frecuentes",
+        "item3": "Cuellos de botella operativos"
+      }
+    },
+    "after": {
+      "title": "Con EfficiencIA",
+      "items": {
+        "item1": "Procesos automatizados 24/7",
+        "item2": "Precisión garantizada con IA",
+        "item3": "Ahorro de costos y tiempo"
+      }
+    }
+  },
+  "services": {
+    "title": "Nuestros servicios",
+    "description": "Soluciones de automatización a medida para cada área de tu negocio.",
+    "items": {
+      "item1": {
+        "title": "Automatización de Procesos (RPA)",
+        "desc": "Eliminamos tareas repetitivas con bots inteligentes que trabajan por ti las 24 horas del día."
+      },
+      "item2": {
+        "title": "Integración de Sistemas",
+        "desc": "Conectamos todas tus herramientas y plataformas para que la información fluya sin fricciones."
+      },
+      "item3": {
+        "title": "Asistentes Virtuales y Bots",
+        "desc": "Chatbots y asistentes con IA que atienden clientes, clasifican datos y resuelven consultas."
+      },
+      "item4": {
+        "title": "Análisis de Datos Automatizado",
+        "desc": "Transforma tus datos en decisiones con reportes automáticos y dashboards inteligentes."
+      }
+    }
+  },
+  "testimonials": {
+    "title": "Lo que dicen nuestros <1>clientes</1>",
+    "description": "Resultados reales de empresas que confiaron en EfficiencIA.",
+    "items": {
+      "item1": {
+        "role": "CEO, Nodus Flex Center",
+        "quote": "Redujimos el tiempo de respuesta de mensajes en un 40%. El equipo ahora se enfoca en análisis estratégico."
+      },
+      "item2": {
+        "role": "Coordinadora, Nodus Flex Center",
+        "quote": "La automatización de facturación nos ahorró 120 horas al mes. El ROI fue visible desde el primer trimestre."
+      }
+    }
+  }
+}

@@ -1,1 +1,172 @@
-{}
+{
+  "contactForm": {
+    "successTitle": "Thank you!",
+    "successMessage": "An AI expert will analyze your case and contact you soon.",
+    "errorTitle": "Connection Error!",
+    "errorMessage": "We couldn't reach the server. Please try again later.",
+    "fields": {
+      "name": {
+        "label": "Full Name",
+        "placeholder": "John Doe"
+      },
+      "number": {
+        "label": "Phone Number",
+        "placeholder": "Your phone number"
+      },
+      "email": {
+        "label": "Corporate Email",
+        "placeholder": "john@company.com"
+      },
+      "company": {
+        "label": "Company Name",
+        "placeholder": "Company Inc."
+      },
+      "message": {
+        "label": "What manual process would you like to automate?",
+        "placeholder": "Briefly describe the process you want to optimize..."
+      }
+    },
+    "buttons": {
+      "sending": "Sending...",
+      "submit": "Request Free Consultation"
+    },
+    "footerText": "🔒 Your data is safe. Zero spam.",
+    "errors": {
+      "nameRequired": "Name is required",
+      "numberOnly": "Only numbers are allowed",
+      "numberLength": "The number must be exactly 10 digits",
+      "emailInvalid": "Enter a valid email",
+      "messageRequired": "Message is required",
+      "captchaRequired": "Please verify that you are not a robot"
+    }
+  },
+  "contactModal": {
+    "title": "Schedule your <1>free</1> audit",
+    "description": "Fill out the form and an AI expert will analyze your case."
+  },
+  "contactSection": {
+    "title": "Schedule your <1>free</1> audit",
+    "description": "Tell us about your company and an expert will contact you to analyze how AI can optimize your processes."
+  },
+  "ctaBanner": {
+    "title": "Ready to transform your company's<1 /> workflow?",
+    "description": "Schedule a free audit and discover how much time and money you can save with intelligent automation.",
+    "button": "Schedule your free audit"
+  },
+  "footer": {
+    "description": "Automation and Artificial Intelligence for companies that want to grow without limits.",
+    "navTitle": "Navigation",
+    "nav": {
+      "benefits": "Benefits",
+      "services": "Services",
+      "howItWorks": "How it works"
+    },
+    "contactTitle": "Contact",
+    "socialTitle": "Follow us",
+    "rights": "© {{year}} EfficiencIA. All rights reserved."
+  },
+  "header": {
+    "nav": {
+      "benefits": "Benefits",
+      "services": "Services",
+      "howItWorks": "How it works"
+    },
+    "button": "Schedule a free audit"
+  },
+  "hero": {
+    "badge": "Enterprise Automation with AI",
+    "title": "Eliminate repetitive tasks. Multiply your <1>EfficiencIA</1>.",
+    "description": "We automate your company's processes using Artificial Intelligence so your team can focus on what really matters: <1>growing</1>.",
+    "buttons": {
+      "start": "Start automating",
+      "cases": "See success cases"
+    },
+    "visual": {
+      "header": "EfficiencIA Dashboard",
+      "steps": {
+        "step1": "Data reception",
+        "step2": "AI Processing",
+        "step3": "Report generation"
+      },
+      "completed": "✓ Process completed — 3.2s"
+    }
+  },
+  "howWeWork": {
+    "title": "How we work",
+    "description": "A clear and transparent three-step process towards total automation.",
+    "stepLabel": "Step {{num}}",
+    "steps": {
+      "step1": {
+        "title": "Process Audit",
+        "desc": "We analyze your current workflows to identify automation opportunities with the highest impact."
+      },
+      "step2": {
+        "title": "Development and Integration",
+        "desc": "We design and build customized solutions that integrate seamlessly with your existing systems."
+      },
+      "step3": {
+        "title": "Deployment and Optimization",
+        "desc": "We implement, monitor, and continuously optimize to ensure growing results."
+      }
+    }
+  },
+  "logoStrip": {
+    "title": "Companies that already multiplied their efficiency"
+  },
+  "problemSolution": {
+    "title": "From slow processes to total <1>EfficiencIA</1>",
+    "description": "Discover how intelligent automation transforms your company's operation.",
+    "before": {
+      "title": "Without automation",
+      "items": {
+        "item1": "Hours lost on manual tasks",
+        "item2": "Frequent human errors",
+        "item3": "Operational bottlenecks"
+      }
+    },
+    "after": {
+      "title": "With EfficiencIA",
+      "items": {
+        "item1": "Automated processes 24/7",
+        "item2": "Accuracy guaranteed with AI",
+        "item3": "Cost and time savings"
+      }
+    }
+  },
+  "services": {
+    "title": "Our services",
+    "description": "Custom automation solutions for every area of your business.",
+    "items": {
+      "item1": {
+        "title": "Process Automation (RPA)",
+        "desc": "We eliminate repetitive tasks with intelligent bots that work for you 24 hours a day."
+      },
+      "item2": {
+        "title": "System Integration",
+        "desc": "We connect all your tools and platforms so that information flows without friction."
+      },
+      "item3": {
+        "title": "Virtual Assistants and Bots",
+        "desc": "Chatbots and AI assistants that serve customers, classify data, and resolve queries."
+      },
+      "item4": {
+        "title": "Automated Data Analysis",
+        "desc": "Transform your data into decisions with automated reports and intelligent dashboards."
+      }
+    }
+  },
+  "testimonials": {
+    "title": "What our <1>clients</1> say",
+    "description": "Real results from companies that trusted EfficiencIA.",
+    "items": {
+      "item1": {
+        "role": "CEO, Nodus Flex Center",
+        "quote": "We reduced message response time by 40%. The team now focuses on strategic analysis."
+      },
+      "item2": {
+        "role": "Coordinator, Nodus Flex Center",
+        "quote": "Billing automation saved us 120 hours a month. ROI was visible from the first quarter."
+      }
+    }
+  }
+}
