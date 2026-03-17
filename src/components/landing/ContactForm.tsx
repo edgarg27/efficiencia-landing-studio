@@ -3,12 +3,12 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, CheckCircle2, Send, CircleX } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+// Omití importar ScrollReveal aquí porque no lo estás usando en este archivo,
+// pero si lo necesitas para otras partes, puedes dejarlo.
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
-import ScrollReveal from "@/components/ScrollReveal";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useTranslation } from "react-i18next";
 import { TFunction } from "i18next";
@@ -36,6 +36,9 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
   const [loading, setLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
 
+  // 👇 1. NUEVO ESTADO: Controla si mostramos el captcha o no
+  const [showCaptcha, setShowCaptcha] = useState(false);
+
   const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const contactSchema = useMemo(() => getContactSchema(t), [t]);
@@ -48,7 +51,7 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
   // Cada vez que cambien los errores, los guardamos y les ponemos timeout
   useEffect(() => {
     if (Object.keys(form.formState.errors).length > 0) {
-      const timer = setTimeout(() => form.clearErrors(), 3000); // borra todos los errores
+      const timer = setTimeout(() => form.clearErrors(), 3000);
       return () => clearTimeout(timer);
     }
   }, [form.formState.errors, form]);
@@ -64,7 +67,7 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
         },
         body: JSON.stringify({
           ...data,
-          token: data.captchaToken // <- Agregamos esto para el Backend
+          token: data.captchaToken
         })
       });
 
@@ -86,6 +89,13 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
     setLoading(false);
   };
 
+  // 👇 2. NUEVA FUNCIÓN: Se activa cuando el usuario toca el formulario
+  const handleUserInteraction = () => {
+    if (!showCaptcha) {
+      setShowCaptcha(true);
+    }
+  };
+
   if (submitted) {
     return (
       <div className="flex flex-col items-center justify-center py-12 text-center gap-4 animate-fade-in">
@@ -99,7 +109,7 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
       </div>
     );
   }
-  
+
   if (hasError) {
     return (
       <div className="flex flex-col items-center justify-center py-12 text-center gap-4 animate-fade-in">
@@ -116,7 +126,13 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className="mt-4 grid grid-cols-1 gap-2 md:gap-6 md:grid-cols-2">
+      {/* 👇 3. Agregamos eventos onFocus y onClick al formulario para detectar interacción */}
+      <form
+        onSubmit={form.handleSubmit(handleSubmit)}
+        onFocus={handleUserInteraction}
+        onClick={handleUserInteraction}
+        className="mt-4 grid grid-cols-1 gap-2 md:gap-6 md:grid-cols-2"
+      >
         <FormField
           control={form.control}
           name="name"
@@ -198,22 +214,32 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
             </FormItem>
           )}
         />
+
+        {/* 👇 4. RENDERIZADO CONDICIONAL: Solo montamos ReCAPTCHA si showCaptcha es true */}
         <FormField
           control={form.control}
           name="captchaToken"
           render={({ field }) => (
-            <FormItem className="flex flex-col items-center justify-center my-4 relative z-50 pointer-events-auto isolate md:col-span-2">
-              <ReCAPTCHA
-                ref={recaptchaRef}
-                sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
-                onChange={(token) => {
-                  field.onChange(token || "");
-                }}
-              />
+            <FormItem className="flex flex-col items-center justify-center my-4 relative z-50 pointer-events-auto isolate md:col-span-2 min-h-[78px]">
+              {showCaptcha ? (
+                <ReCAPTCHA
+                  ref={recaptchaRef}
+                  sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                  onChange={(token) => {
+                    field.onChange(token || "");
+                  }}
+                />
+              ) : (
+                // Opcional: Un pequeño placeholder mientras carga
+                <div className="text-xs text-muted-foreground/50 border border-dashed border-border rounded p-4 w-[304px] text-center">
+                  Haga clic en el formulario para cargar la verificación de seguridad.
+                </div>
+              )}
               <FormMessage />
             </FormItem>
           )}
         />
+
         <Button type="submit" className="w-full gap-2 text-base h-12 md:col-span-2" disabled={loading}>
           {loading ? (
             <>
