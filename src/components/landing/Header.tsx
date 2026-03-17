@@ -75,7 +75,7 @@ const Header = ({ onCtaClick }: { onCtaClick?: () => void }) => {
         <div className="flex items-center gap-2 md:hidden">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="w-9 h-9">
+              <Button aria-label="Abrir menú de idiomas" variant="ghost" size="icon" className="w-9 h-9">
                 <Globe className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
