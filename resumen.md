@@ -38,7 +38,8 @@ Tu workflow de n8n
   "number": "5512345678",
   "email": "juan@empresa.com",
   "company": "Empresa S.A.",
-  "message": "Quiero automatizar el proceso de facturación..."
+  "message": "Quiero automatizar el proceso de facturación...",
+  "plan": "Crecimiento — $6,500 MXN/mes"
 }
 ```
 
@@ -51,8 +52,10 @@ Tu workflow de n8n
 | `email` | string | formato de email válido, máx. 255 caracteres | Sí |
 | `company` | string | máx. 100 caracteres | **No** — puede venir ausente/vacío |
 | `message` | string | 1–1000 caracteres, se recorta espacios | Sí |
+| `plan` | string | `Inicial — $2,500 MXN/mes`, `Crecimiento — $6,500 MXN/mes` o `Empresarial — $14,900 MXN/mes` (el servidor traduce el plan elegido en la web) | **No** — solo viene si el usuario eligió un plan |
 
 Notas para diseñar el workflow:
+- `plan` es **opcional**: solo existe si el usuario eligió un plan en la sección de planes o en el formulario. Si cambias los precios en `src/lib/plans.ts`, actualiza también el mapa `PLANES` de `api/webhook.js`.
 - `company` es **opcional**: puede no venir en el JSON. El nodo que arme el workflow debe manejar el caso de que la propiedad no exista (no asumir que siempre está presente).
 - `number` siempre son 10 dígitos limpios (el frontend ya filtra cualquier caracter no numérico antes de enviarlo), así que no hace falta volver a limpiarlo en n8n, pero sí conviene no asumir un formato de lada específico (México, EE.UU., etc.) si tu workflow lo va a usar para marcar/enviar WhatsApp.
 - `captchaToken` **nunca llega a n8n** — se consume y se descarta en `/api/webhook` antes de reenviar.

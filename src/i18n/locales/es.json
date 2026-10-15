@@ -71,11 +71,26 @@
         "tagA": "[Cliente]",
         "tagB": "[Canal]",
         "msgs": [
-          { "from": "b", "text": "Hola, soy el asistente de [Cliente]. ¿En qué te ayudo hoy?" },
-          { "from": "u", "text": "¿Dónde está mi pedido?" },
-          { "from": "b", "text": "Claro. ¿Me compartes tu número de pedido?" },
-          { "from": "u", "text": "#12345" },
-          { "from": "b", "text": "Tu pedido salió hoy y llega mañana. ¿Quieres que te avise cuando esté en camino?" }
+          {
+            "from": "b",
+            "text": "Hola, soy el asistente de [Cliente]. ¿En qué te ayudo hoy?"
+          },
+          {
+            "from": "u",
+            "text": "¿Dónde está mi pedido?"
+          },
+          {
+            "from": "b",
+            "text": "Claro. ¿Me compartes tu número de pedido?"
+          },
+          {
+            "from": "u",
+            "text": "#12345"
+          },
+          {
+            "from": "b",
+            "text": "Tu pedido salió hoy y llega mañana. ¿Quieres que te avise cuando esté en camino?"
+          }
         ]
       },
       {
@@ -84,11 +99,26 @@
         "tagA": "[Cliente]",
         "tagB": "[Canal]",
         "msgs": [
-          { "from": "b", "text": "¡Hola! Cuéntame, ¿qué proceso te gustaría automatizar?" },
-          { "from": "u", "text": "Nuestra facturación manual" },
-          { "from": "b", "text": "Entendido. ¿Cuántas facturas emiten al mes, aproximadamente?" },
-          { "from": "u", "text": "Unas 300" },
-          { "from": "b", "text": "Perfecto. Puedo agendarte una auditoría gratuita con un experto. ¿Prefieres mañana o el jueves?" }
+          {
+            "from": "b",
+            "text": "¡Hola! Cuéntame, ¿qué proceso te gustaría automatizar?"
+          },
+          {
+            "from": "u",
+            "text": "Nuestra facturación manual"
+          },
+          {
+            "from": "b",
+            "text": "Entendido. ¿Cuántas facturas emiten al mes, aproximadamente?"
+          },
+          {
+            "from": "u",
+            "text": "Unas 300"
+          },
+          {
+            "from": "b",
+            "text": "Perfecto. Puedo agendarte una auditoría gratuita con un experto. ¿Prefieres mañana o el jueves?"
+          }
         ]
       },
       {
@@ -97,10 +127,22 @@
         "tagA": "[Cliente]",
         "tagB": "[Canal]",
         "msgs": [
-          { "from": "u", "text": "¿Cómo solicito vacaciones?" },
-          { "from": "b", "text": "Entra al portal de RR. HH. y elige \"Nueva solicitud\". Tu jefe la aprueba en un día hábil." },
-          { "from": "u", "text": "¿Y cuántos días me quedan?" },
-          { "from": "b", "text": "Consulto tu saldo… ¿quieres que lo envíe también a tu correo?" }
+          {
+            "from": "u",
+            "text": "¿Cómo solicito vacaciones?"
+          },
+          {
+            "from": "b",
+            "text": "Entra al portal de RR. HH. y elige \"Nueva solicitud\". Tu jefe la aprueba en un día hábil."
+          },
+          {
+            "from": "u",
+            "text": "¿Y cuántos días me quedan?"
+          },
+          {
+            "from": "b",
+            "text": "Consulto tu saldo… ¿quieres que lo envíe también a tu correo?"
+          }
         ]
       }
     ]
@@ -132,9 +174,9 @@
     "title": "Elige el plan que impulsa tu operación",
     "description": "Tres niveles para empezar pequeño o automatizar toda la empresa. Todos incluyen una auditoría gratuita.",
     "perMonth": "/ mes",
-    "billing": "[Detalle de facturación o pago único]",
+    "billing": "MXN · más IVA",
     "featured": "Más elegido",
-    "note": "Precios y alcance de ejemplo: reemplaza $[PRECIO] y las características por los de tus planes reales.",
+    "note": "Precios de ejemplo en pesos mexicanos: ajústalos en src/lib/plans.ts a los de tus planes reales.",
     "p1Name": "Inicial",
     "p1Desc": "Para validar la automatización en un proceso clave.",
     "p1f1": "Auditoría de procesos",
@@ -157,7 +199,9 @@
     "p3f3": "Integración de sistemas a medida",
     "p3f4": "Asistentes virtuales internos",
     "p3f5": "Gestor de cuenta dedicado",
-    "p3Cta": "Hablar con un experto"
+    "p3Cta": "Hablar con un experto",
+    "currency": "MXN",
+    "selected": "Plan elegido"
   },
   "contact": {
     "label": "CONTACTO",
@@ -183,7 +227,9 @@
       "emailInvalid": "Ingresa un correo válido",
       "messageRequired": "Cuéntanos qué proceso quieres automatizar",
       "captchaRequired": "Por favor, verifica que no eres un robot"
-    }
+    },
+    "plan": "Plan de interés (opcional)",
+    "planNone": "Sin preferencia"
   },
   "cta": {
     "title": "¿Listo para transformar el flujo de trabajo de tu empresa?",

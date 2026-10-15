@@ -71,11 +71,26 @@
         "tagA": "[Client]",
         "tagB": "[Channel]",
         "msgs": [
-          { "from": "b", "text": "Hi, I'm [Client]'s assistant. How can I help you today?" },
-          { "from": "u", "text": "Where is my order?" },
-          { "from": "b", "text": "Sure. Can you share your order number?" },
-          { "from": "u", "text": "#12345" },
-          { "from": "b", "text": "Your order shipped today and arrives tomorrow. Want me to notify you when it's on its way?" }
+          {
+            "from": "b",
+            "text": "Hi, I'm [Client]'s assistant. How can I help you today?"
+          },
+          {
+            "from": "u",
+            "text": "Where is my order?"
+          },
+          {
+            "from": "b",
+            "text": "Sure. Can you share your order number?"
+          },
+          {
+            "from": "u",
+            "text": "#12345"
+          },
+          {
+            "from": "b",
+            "text": "Your order shipped today and arrives tomorrow. Want me to notify you when it's on its way?"
+          }
         ]
       },
       {
@@ -84,11 +99,26 @@
         "tagA": "[Client]",
         "tagB": "[Channel]",
         "msgs": [
-          { "from": "b", "text": "Hi! Tell me, which process would you like to automate?" },
-          { "from": "u", "text": "Our manual invoicing" },
-          { "from": "b", "text": "Got it. Roughly how many invoices do you issue per month?" },
-          { "from": "u", "text": "About 300" },
-          { "from": "b", "text": "Great. I can book you a free audit with an expert. Do you prefer tomorrow or Thursday?" }
+          {
+            "from": "b",
+            "text": "Hi! Tell me, which process would you like to automate?"
+          },
+          {
+            "from": "u",
+            "text": "Our manual invoicing"
+          },
+          {
+            "from": "b",
+            "text": "Got it. Roughly how many invoices do you issue per month?"
+          },
+          {
+            "from": "u",
+            "text": "About 300"
+          },
+          {
+            "from": "b",
+            "text": "Great. I can book you a free audit with an expert. Do you prefer tomorrow or Thursday?"
+          }
         ]
       },
       {
@@ -97,10 +127,22 @@
         "tagA": "[Client]",
         "tagB": "[Channel]",
         "msgs": [
-          { "from": "u", "text": "How do I request time off?" },
-          { "from": "b", "text": "Go to the HR portal and choose \"New request\". Your manager approves it within one business day." },
-          { "from": "u", "text": "And how many days do I have left?" },
-          { "from": "b", "text": "Checking your balance… do you want me to email it to you as well?" }
+          {
+            "from": "u",
+            "text": "How do I request time off?"
+          },
+          {
+            "from": "b",
+            "text": "Go to the HR portal and choose \"New request\". Your manager approves it within one business day."
+          },
+          {
+            "from": "u",
+            "text": "And how many days do I have left?"
+          },
+          {
+            "from": "b",
+            "text": "Checking your balance… do you want me to email it to you as well?"
+          }
         ]
       }
     ]
@@ -132,9 +174,9 @@
     "title": "Choose the plan that powers your operation",
     "description": "Three tiers to start small or automate the whole company. All include a free audit.",
     "perMonth": "/ month",
-    "billing": "[Billing details or one-time payment]",
+    "billing": "MXN · plus VAT",
     "featured": "Most popular",
-    "note": "Sample pricing and scope: replace $[PRECIO] and the features with those of your real plans.",
+    "note": "Sample prices in Mexican pesos: adjust them in src/lib/plans.ts to match your real plans.",
     "p1Name": "Starter",
     "p1Desc": "To validate automation on one key process.",
     "p1f1": "Process audit",
@@ -157,7 +199,9 @@
     "p3f3": "Custom systems integration",
     "p3f4": "Internal virtual assistants",
     "p3f5": "Dedicated account manager",
-    "p3Cta": "Talk to an expert"
+    "p3Cta": "Talk to an expert",
+    "currency": "MXN",
+    "selected": "Selected plan"
   },
   "contact": {
     "label": "CONTACT",
@@ -183,7 +227,9 @@
       "emailInvalid": "Enter a valid email",
       "messageRequired": "Tell us which process you want to automate",
       "captchaRequired": "Please verify that you are not a robot"
-    }
+    },
+    "plan": "Plan of interest (optional)",
+    "planNone": "No preference"
   },
   "cta": {
     "title": "Ready to transform your company's workflow?",

@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import type { TFunction } from "i18next";
 import { z } from "zod";
 import ReCAPTCHA from "react-google-recaptcha";
+import { formatPrice, PLAN_IDS, PLAN_NAME_KEY, PLAN_PRICES, selectPlan, usePlan, type PlanId } from "@/lib/plans";
 
 const getContactSchema = (t: TFunction) =>
   z.object({
@@ -33,6 +34,8 @@ const ContactForm = () => {
   const [loading, setLoading] = useState(false);
   const [failed, setFailed] = useState(false);
   const [sent, setSent] = useState(false);
+  const plan = usePlan();
+  const [flash, setFlash] = useState(false);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -56,6 +59,14 @@ const ContactForm = () => {
     io.observe(el);
     return () => io.disconnect();
   }, [showCaptcha, sent]);
+
+  // Al elegir un plan desde las tarjetas, el selector del formulario se resalta un momento.
+  useEffect(() => {
+    if (!plan || document.activeElement?.id === "f-plan") return;
+    setFlash(true);
+    const id = setTimeout(() => setFlash(false), 1400);
+    return () => clearTimeout(id);
+  }, [plan]);
 
   const set = (key: keyof Values) => (value: string) => {
     setValues((v) => ({ ...v, [key]: value }));
@@ -82,11 +93,12 @@ const ContactForm = () => {
       const res = await fetch("/api/webhook", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(parsed.data),
+        body: JSON.stringify(plan ? { ...parsed.data, plan } : parsed.data),
       });
       if (!res.ok) throw new Error("webhook");
       setSent(true);
       setValues(emptyValues);
+      selectPlan(null);
       recaptchaRef.current?.reset();
     } catch {
       setFailed(true);
@@ -110,7 +122,7 @@ const ContactForm = () => {
   }
 
   return (
-    <form ref={formRef} onSubmit={submit} onFocus={() => setShowCaptcha(true)} onClick={() => setShowCaptcha(true)} noValidate style={{ display: "grid", gap: "18px" }}>
+    <form ref={formRef} onSubmit={submit} onFocus={() => setShowCaptcha(true)} onClick={() => setShowCaptcha(true)} noValidate style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr)", gap: "18px" }}>
       <div>
         <label className="lbl" htmlFor="f-nombre">{t("form.name")}</label>
         <input className="field" id="f-nombre" name="nombre" type="text" autoComplete="name" required maxLength={100} value={values.name} onChange={(e) => set("name")(e.target.value)} aria-invalid={!!errors.name} />
@@ -133,12 +145,29 @@ const ContactForm = () => {
         <input className="field" id="f-emp" name="empresa" type="text" autoComplete="organization" maxLength={100} value={values.company} onChange={(e) => set("company")(e.target.value)} />
       </div>
       <div>
+        <label className="lbl" htmlFor="f-plan">{t("form.plan")}</label>
+        <select
+          className={"field" + (flash ? " flash" : "")}
+          id="f-plan"
+          name="plan"
+          value={plan ?? ""}
+          onChange={(e) => selectPlan((e.target.value || null) as PlanId | null)}
+        >
+          <option value="">{t("form.planNone")}</option>
+          {PLAN_IDS.map((id) => (
+            <option key={id} value={id}>
+              {t(PLAN_NAME_KEY[id])} — {formatPrice(PLAN_PRICES[id], i18n.language)} {t("plans.currency")} {t("plans.perMonth")}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div>
         <label className="lbl" htmlFor="f-proc">{t("form.message")}</label>
         <textarea data-lenis-prevent className="field" id="f-proc" name="proceso" rows={4} required maxLength={1000} style={{ resize: "vertical" }} value={values.message} onChange={(e) => set("message")(e.target.value)} aria-invalid={!!errors.message} />
         {errors.message && <p style={errStyle}>{errors.message}</p>}
       </div>
 
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", minHeight: "78px" }}>
+      <div className="rc-wrap" style={{ display: "flex", flexDirection: "column", alignItems: "center", minHeight: "78px" }}>
         {showCaptcha && (
           <ReCAPTCHA
             ref={recaptchaRef}
