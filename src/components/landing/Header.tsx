@@ -1,124 +1,83 @@
-import { useState } from "react";
-import { Menu, X, Globe } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import BrandLogo from "@/components/BrandLogo";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { LANGS } from "@/i18n";
 
-const Header = ({ onCtaClick }: { onCtaClick?: () => void }) => {
+const NAV = [
+  { id: "beneficios", key: "header.benefits" },
+  { id: "servicios", key: "header.services" },
+  { id: "portafolio", key: "header.portfolio" },
+  { id: "proceso", key: "header.process" },
+  { id: "planes", key: "header.plans" },
+] as const;
+
+const Header = () => {
   const { t, i18n } = useTranslation();
-  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLElement>(null);
+  const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState<string | null>(null);
 
-  const navLinks = [
-    { label: t("header.nav.benefits"), href: "#beneficios" },
-    { label: t("header.nav.services"), href: "#servicios" },
-    { label: t("header.nav.howItWorks"), href: "#como-funciona" },
-  ];
+  // Publica la altura del encabezado (--hd-h) para que el hero ocupe el resto de la primera pantalla.
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const set = () => document.documentElement.style.setProperty("--hd-h", el.offsetHeight + "px");
+    set();
+    const ro = new ResizeObserver(set);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
-  const scrollTo = (href: string) => {
-    setOpen(false);
-    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
-  };
+  // Encabezado con fondo difuminado en cuanto se empieza a hacer scroll.
+  useEffect(() => {
+    const onScroll = () => setScrolled((s) => (s === window.scrollY > 8 ? s : !s));
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
-  const changeLanguage = (lng: string) => {
-    i18n.changeLanguage(lng);
-    setOpen(false);
-  };
+  // Resalta en el menú la sección que está en el centro de la pantalla.
+  useEffect(() => {
+    if (!("IntersectionObserver" in window)) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) setActive(e.target.id === "inicio" ? null : e.target.id);
+        }
+      },
+      { rootMargin: "-40% 0px -55% 0px" },
+    );
+    ["inicio", ...NAV.map((n) => n.id)].forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) io.observe(el);
+    });
+    return () => io.disconnect();
+  }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 bg-background/80 backdrop-blur-lg border-b border-border/50">
-      <div className="section-container flex items-center justify-between h-16 md:h-20">
-        <BrandLogo />
-
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((l) => (
-            <button
-              key={l.href}
-              onClick={() => scrollTo(l.href)}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-            >
-              {l.label}
-            </button>
+    <div className="hd-bar" data-scrolled={scrolled}>
+      <header ref={ref} className="nav top hd" style={{ maxWidth: "1200px", margin: "0 auto", padding: "16px 24px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "16px", flexWrap: "wrap" }}>
+        <a className="hd-logo logo-link" href="/" aria-label={t("header.logoLabel")} style={{ display: "flex", alignItems: "center" }}>
+          <img src="/logo.png" alt="" width="77" height="44" style={{ display: "block", height: "44px", width: "auto" }} />
+        </a>
+        <nav className="hd-nav" aria-label={t("header.navLabel")} style={{ display: "flex", alignItems: "center", gap: "36px" }}>
+          {NAV.map((n) => (
+            <a key={n.id} className="lnk" href={`#${n.id}`} aria-current={active === n.id ? "location" : undefined} style={{ fontSize: "14px", fontWeight: "500", color: "#47566B" }}>
+              {t(n.key)}
+            </a>
           ))}
         </nav>
-
-        <div className="hidden md:flex items-center gap-4">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button aria-label="Abrir menú de idiomas" variant="ghost" size="icon" className="w-9 h-9">
-                <Globe className="h-4 w-4" />
-                <span className="sr-only">Cambiar idioma</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => changeLanguage("es")}>
-                Español
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => changeLanguage("en")}>
-                English
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          <Button size="sm" onClick={onCtaClick}>
-            {t("header.button")}
-          </Button>
-        </div>
-
-        {/* Mobile toggle & language (for mobile) */}
-        <div className="flex items-center gap-2 md:hidden">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button aria-label="Abrir menú de idiomas" variant="ghost" size="icon" className="w-9 h-9">
-                <Globe className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => changeLanguage("es")}>
-                Español
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => changeLanguage("en")}>
-                English
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          <button
-            className="p-2 text-foreground"
-            onClick={() => setOpen(!open)}
-            aria-label="Toggle menu"
-          >
-            {open ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile menu */}
-      {open && (
-        <div className="md:hidden bg-background border-b border-border animate-fade-in">
-          <div className="section-container py-4 flex flex-col gap-4">
-            {navLinks.map((l) => (
-              <button
-                key={l.href}
-                onClick={() => scrollTo(l.href)}
-                className="text-left text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-              >
-                {l.label}
+        <div className="hd-actions" style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
+          <div className="lang" role="group" aria-label={t("header.langLabel")}>
+            {LANGS.map((lng) => (
+              <button key={lng} type="button" lang={lng} aria-pressed={i18n.resolvedLanguage === lng} onClick={() => i18n.changeLanguage(lng)}>
+                {lng.toUpperCase()}
               </button>
             ))}
-            <Button size="sm" onClick={() => { setOpen(false); onCtaClick?.(); }} className="w-full">
-              {t("header.button")}
-            </Button>
           </div>
+          <a className="btn btn-p" href="#contacto" style={{ minHeight: "44px", padding: "0 18px", fontSize: "14px" }}>{t("header.cta")}</a>
         </div>
-      )}
-    </header>
+      </header>
+    </div>
   );
 };
 

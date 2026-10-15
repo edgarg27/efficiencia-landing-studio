@@ -1,33 +1,19 @@
-import ScrollReveal from "@/components/ScrollReveal";
 import { useTranslation } from "react-i18next";
-
-const logos = ["Nodus Flex Center"];
-
 const LogoStrip = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="py-10 md:py-14 bg-background border-b border-border/50">
-      <div className="section-container">
-        <ScrollReveal>
-          <p className="text-center text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-8">
-            {t("logoStrip.title")}
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-14">
-            {logos.map((name) => (
-              <div
-                key={name}
-                className="flex items-center justify-center h-10 px-5 rounded-lg bg-muted/60 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300"
-              >
-                <span className="text-sm font-bold tracking-wide text-muted-foreground select-none">
-                  {name}
-                </span>
-              </div>
-            ))}
-          </div>
-        </ScrollReveal>
-      </div>
-    </section>
+  <>
+<section id="casos" style={{ borderTop: "1px solid #E1E7EF", borderBottom: "1px solid #E1E7EF", background: "#F9FAFB" }}>
+ <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "36px 24px", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: "20px" }}>
+  <p className="rv" style={{ margin: "0", fontSize: "12px", fontWeight: "700", letterSpacing: ".1em", color: "#47566B" }}>{t("logoStrip.title")}</p>
+  <div className="rv2" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+   <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="14" fill="#121821"/><path d="M9 19V9l10 10V9" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+   <span className="disp" style={{ fontSize: "22px", fontWeight: "700", color: "#121821" }}>Nodus Flex Center</span>
+  </div>
+ </div>
+</section>
+  </>
   );
 };
 

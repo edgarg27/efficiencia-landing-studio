@@ -1,172 +1,256 @@
 {
-  "contactForm": {
-    "successTitle": "¡Gracias!",
-    "successMessage": "Un experto en IA analizará tu caso y te contactará pronto.",
-    "errorTitle": "¡Error de conexión!",
-    "errorMessage": "No pudimos comunicarnos con el servidor. Por favor, intenta de nuevo más tarde.",
-    "fields": {
-      "name": {
-        "label": "Nombre completo",
-        "placeholder": "Juan Pérez"
+  "meta": {
+    "title": "Automatización Empresarial con Inteligencia Artificial | EfficiencIA",
+    "description": "Transforma tu empresa con soluciones de Inteligencia Artificial. Realizamos auditoría, desarrollo y optimización de procesos para maximizar tu eficiencia."
+  },
+  "header": {
+    "logoLabel": "EfficiencIA, inicio",
+    "navLabel": "Principal",
+    "benefits": "Beneficios",
+    "services": "Servicios",
+    "portfolio": "Portafolio",
+    "plans": "Planes",
+    "process": "Cómo funciona",
+    "cta": "Agenda una auditoría gratuita",
+    "langLabel": "Idioma"
+  },
+  "hero": {
+    "badge": "AUTOMATIZACIÓN EMPRESARIAL CON IA",
+    "title": "Elimina las tareas repetitivas. Multiplica tu <b>EfficiencIA</b>.",
+    "description": "Automatizamos los procesos de tu empresa utilizando Inteligencia Artificial para que tu equipo se enfoque en lo que realmente importa: <b>crecer</b>.",
+    "start": "Comienza a automatizar",
+    "cases": "Ver casos de éxito",
+    "dashboard": "EfficiencIA Dashboard",
+    "step1": "Recepción de datos",
+    "step2": "Procesamiento IA",
+    "step3": "Generación de reportes",
+    "done": "Proceso completado —"
+  },
+  "logoStrip": {
+    "title": "EMPRESAS QUE YA MULTIPLICARON SU EFICIENCIA"
+  },
+  "benefits": {
+    "label": "BENEFICIOS",
+    "title": "De procesos lentos a <b>EfficiencIA</b> total",
+    "description": "Descubre cómo la automatización inteligente transforma la operación de tu empresa.",
+    "beforeTitle": "Sin automatización",
+    "before1": "Horas perdidas en tareas manuales",
+    "before2": "Errores humanos frecuentes",
+    "before3": "Cuellos de botella operativos",
+    "afterTitle": "Con EfficiencIA",
+    "after1": "Procesos automatizados 24/7",
+    "after2": "Precisión garantizada con IA",
+    "after3": "Ahorro de costos y tiempo"
+  },
+  "services": {
+    "label": "SERVICIOS",
+    "title": "Nuestros servicios",
+    "description": "Soluciones de automatización a medida para cada área de tu negocio.",
+    "item1Title": "Automatización de Procesos (RPA)",
+    "item1Desc": "Eliminamos tareas repetitivas con bots inteligentes que trabajan por ti las 24 horas del día.",
+    "item2Title": "Integración de Sistemas",
+    "item2Desc": "Conectamos todas tus herramientas y plataformas para que la información fluya sin fricciones.",
+    "item3Title": "Asistentes Virtuales y Bots",
+    "item3Desc": "Chatbots y asistentes con IA que atienden clientes, clasifican datos y resuelven consultas.",
+    "item4Title": "Análisis de Datos Automatizado",
+    "item4Desc": "Transforma tus datos en decisiones con reportes automáticos y dashboards inteligentes."
+  },
+  "portfolio": {
+    "label": "PORTAFOLIO",
+    "title": "Chatbots que ya conversan por ti",
+    "description": "Explora ejemplos de asistentes con IA y mira cómo atienden, clasifican y resuelven en tiempo real.",
+    "groupLabel": "Proyectos de chatbot",
+    "note": "Ejemplos ilustrativos. Sustituye cada proyecto por un caso real de tu portafolio.",
+    "botName": "Asistente EfficiencIA",
+    "status": "En línea · responde en segundos",
+    "placeholder": "Escribe tu mensaje…",
+    "cases": [
+      {
+        "title": "Atención al cliente 24/7",
+        "desc": "Responde preguntas frecuentes, consulta pedidos y deriva a una persona cuando hace falta.",
+        "tagA": "[Cliente]",
+        "tagB": "[Canal]",
+        "msgs": [
+          {
+            "from": "b",
+            "text": "Hola, soy el asistente de [Cliente]. ¿En qué te ayudo hoy?"
+          },
+          {
+            "from": "u",
+            "text": "¿Dónde está mi pedido?"
+          },
+          {
+            "from": "b",
+            "text": "Claro. ¿Me compartes tu número de pedido?"
+          },
+          {
+            "from": "u",
+            "text": "#12345"
+          },
+          {
+            "from": "b",
+            "text": "Tu pedido salió hoy y llega mañana. ¿Quieres que te avise cuando esté en camino?"
+          }
+        ]
       },
-      "number": {
-        "label": "Numero de telefono",
-        "placeholder": "Tu numero de telefono"
+      {
+        "title": "Calificación de leads",
+        "desc": "Hace las preguntas correctas, clasifica al prospecto y agenda una llamada con ventas.",
+        "tagA": "[Cliente]",
+        "tagB": "[Canal]",
+        "msgs": [
+          {
+            "from": "b",
+            "text": "¡Hola! Cuéntame, ¿qué proceso te gustaría automatizar?"
+          },
+          {
+            "from": "u",
+            "text": "Nuestra facturación manual"
+          },
+          {
+            "from": "b",
+            "text": "Entendido. ¿Cuántas facturas emiten al mes, aproximadamente?"
+          },
+          {
+            "from": "u",
+            "text": "Unas 300"
+          },
+          {
+            "from": "b",
+            "text": "Perfecto. Puedo agendarte una auditoría gratuita con un experto. ¿Prefieres mañana o el jueves?"
+          }
+        ]
       },
-      "email": {
-        "label": "Correo corporativo",
-        "placeholder": "juan@empresa.com"
-      },
-      "company": {
-        "label": "Nombre de la empresa",
-        "placeholder": "Empresa S.A."
-      },
-      "message": {
-        "label": "¿Qué proceso manual te gustaría automatizar?",
-        "placeholder": "Describe brevemente el proceso que quieres optimizar..."
+      {
+        "title": "Asistente interno",
+        "desc": "Resuelve dudas del equipo sobre políticas, procesos y herramientas, con respuestas al instante.",
+        "tagA": "[Cliente]",
+        "tagB": "[Canal]",
+        "msgs": [
+          {
+            "from": "u",
+            "text": "¿Cómo solicito vacaciones?"
+          },
+          {
+            "from": "b",
+            "text": "Entra al portal de RR. HH. y elige \"Nueva solicitud\". Tu jefe la aprueba en un día hábil."
+          },
+          {
+            "from": "u",
+            "text": "¿Y cuántos días me quedan?"
+          },
+          {
+            "from": "b",
+            "text": "Consulto tu saldo… ¿quieres que lo envíe también a tu correo?"
+          }
+        ]
       }
-    },
-    "buttons": {
-      "sending": "Enviando...",
-      "submit": "Solicitar asesoría gratuita"
-    },
-    "footerText": "🔒 Tus datos están seguros. Cero spam.",
+    ]
+  },
+  "process": {
+    "label": "CÓMO FUNCIONA",
+    "title": "Cómo trabajamos",
+    "description": "Un proceso claro y transparente en tres pasos hacia la automatización total.",
+    "step": "PASO {{n}}",
+    "step1Title": "Auditoría de Procesos",
+    "step1Desc": "Analizamos tus flujos de trabajo actuales para identificar oportunidades de automatización con el mayor impacto.",
+    "step2Title": "Desarrollo e Integración",
+    "step2Desc": "Diseñamos y construimos soluciones personalizadas que se integran perfectamente con tus sistemas existentes.",
+    "step3Title": "Despliegue y Optimización",
+    "step3Desc": "Implementamos, monitorizamos y optimizamos continuamente para garantizar resultados crecientes."
+  },
+  "testimonials": {
+    "label": "CLIENTES",
+    "title": "Lo que dicen nuestros clientes",
+    "description": "Resultados reales de empresas que confiaron en EfficiencIA.",
+    "perMonth": " /mes",
+    "quote1": "“Redujimos el tiempo de respuesta de mensajes en un 40%. El equipo ahora se enfoca en análisis estratégico.”",
+    "role1": "CEO, Nodus Flex Center",
+    "quote2": "“La automatización de facturación nos ahorró 120 horas al mes. El ROI fue visible desde el primer trimestre.”",
+    "role2": "Coordinadora, Nodus Flex Center"
+  },
+  "plans": {
+    "label": "PLANES",
+    "title": "Elige el plan que impulsa tu operación",
+    "description": "Tres niveles para empezar pequeño o automatizar toda la empresa. Todos incluyen una auditoría gratuita.",
+    "perMonth": "/ mes",
+    "billing": "MXN · más IVA",
+    "featured": "Más elegido",
+    "note": "Precios de ejemplo en pesos mexicanos: ajústalos en src/lib/plans.ts a los de tus planes reales.",
+    "p1Name": "Inicial",
+    "p1Desc": "Para validar la automatización en un proceso clave.",
+    "p1f1": "Auditoría de procesos",
+    "p1f2": "1 automatización (RPA)",
+    "p1f3": "Integración con 2 herramientas",
+    "p1f4": "Soporte por correo",
+    "p1Cta": "Empezar",
+    "p2Name": "Crecimiento",
+    "p2Desc": "Para equipos que quieren automatizar varias áreas.",
+    "p2f1": "Todo lo del plan Inicial",
+    "p2f2": "Hasta 5 automatizaciones",
+    "p2f3": "Chatbot con IA para clientes",
+    "p2f4": "Reportes y dashboards automáticos",
+    "p2f5": "Soporte prioritario",
+    "p2Cta": "Elegir Crecimiento",
+    "p3Name": "Empresarial",
+    "p3Desc": "Para operaciones complejas y a la medida.",
+    "p3f1": "Todo lo del plan Crecimiento",
+    "p3f2": "Automatizaciones ilimitadas",
+    "p3f3": "Integración de sistemas a medida",
+    "p3f4": "Asistentes virtuales internos",
+    "p3f5": "Gestor de cuenta dedicado",
+    "p3Cta": "Hablar con un experto",
+    "currency": "MXN",
+    "selected": "Plan elegido"
+  },
+  "contact": {
+    "label": "CONTACTO",
+    "title": "Agenda tu auditoría gratuita",
+    "description": "Cuéntanos sobre tu empresa y un experto te contactará para analizar cómo la IA puede optimizar tus procesos."
+  },
+  "form": {
+    "name": "Nombre completo",
+    "phone": "Número de teléfono",
+    "email": "Correo corporativo",
+    "company": "Nombre de la empresa",
+    "message": "¿Qué proceso manual te gustaría automatizar?",
+    "submit": "Solicitar asesoría gratuita",
+    "sending": "Enviando...",
+    "privacy": "Tus datos están seguros. Cero spam.",
+    "failed": "No pudimos enviar tu solicitud. Por favor, intenta de nuevo más tarde.",
+    "successTitle": "¡Recibido!",
+    "successMessage": "Un experto de EfficiencIA te contactará pronto para agendar tu auditoría.",
     "errors": {
       "nameRequired": "El nombre es obligatorio",
       "numberOnly": "Solo se permiten números",
       "numberLength": "El número debe tener exactamente 10 dígitos",
       "emailInvalid": "Ingresa un correo válido",
-      "messageRequired": "El mensaje es obligatorio",
+      "messageRequired": "Cuéntanos qué proceso quieres automatizar",
       "captchaRequired": "Por favor, verifica que no eres un robot"
-    }
+    },
+    "plan": "Plan de interés (opcional)",
+    "planNone": "Sin preferencia"
   },
-  "contactModal": {
-    "title": "Agenda tu auditoría <1>gratuita</1>",
-    "description": "Completa el formulario y un experto en IA analizará tu caso."
-  },
-  "contactSection": {
-    "title": "Agenda tu auditoría <1>gratuita</1>",
-    "description": "Cuéntanos sobre tu empresa y un experto te contactará para analizar cómo la IA puede optimizar tus procesos."
-  },
-  "ctaBanner": {
-    "title": "¿Listo para transformar el flujo de<1 /> trabajo de tu empresa?",
+  "cta": {
+    "title": "¿Listo para transformar el flujo de trabajo de tu empresa?",
     "description": "Agenda una auditoría gratuita y descubre cuánto tiempo y dinero puedes ahorrar con automatización inteligente.",
     "button": "Agenda tu auditoría gratuita"
   },
   "footer": {
     "description": "Automatización e Inteligencia Artificial para empresas que quieren crecer sin límites.",
-    "navTitle": "Navegación",
-    "nav": {
-      "benefits": "Beneficios",
-      "services": "Servicios",
-      "howItWorks": "Cómo funciona"
-    },
-    "contactTitle": "Contacto",
-    "socialTitle": "Síguenos",
+    "navLabel": "Pie de página",
+    "navTitle": "NAVEGACIÓN",
+    "benefits": "Beneficios",
+    "services": "Servicios",
+    "process": "Cómo funciona",
+    "contact": "Contacto",
+    "socialTitle": "SÍGUENOS",
     "rights": "© {{year}} EfficiencIA. Todos los derechos reservados."
   },
-  "header": {
-    "nav": {
-      "benefits": "Beneficios",
-      "services": "Servicios",
-      "howItWorks": "Cómo funciona"
-    },
-    "button": "Agenda una auditoría gratuita"
-  },
-  "hero": {
-    "badge": "Automatización Empresarial con IA",
-    "title": "Elimina las tareas repetitivas. Multiplica tu <1>EfficiencIA</1>.",
-    "description": "Automatizamos los procesos de tu empresa utilizando Inteligencia Artificial para que tu equipo se enfoque en lo que realmente importa: <1>crecer</1>.",
-    "buttons": {
-      "start": "Comienza a automatizar",
-      "cases": "Ver casos de éxito"
-    },
-    "visual": {
-      "header": "EfficiencIA Dashboard",
-      "steps": {
-        "step1": "Recepción de datos",
-        "step2": "Procesamiento IA",
-        "step3": "Generación de reportes"
-      },
-      "completed": "✓ Proceso completado — 3.2s"
-    }
-  },
-  "howWeWork": {
-    "title": "Cómo trabajamos",
-    "description": "Un proceso claro y transparente en tres pasos hacia la automatización total.",
-    "stepLabel": "Paso {{num}}",
-    "steps": {
-      "step1": {
-        "title": "Auditoría de Procesos",
-        "desc": "Analizamos tus flujos de trabajo actuales para identificar oportunidades de automatización con el mayor impacto."
-      },
-      "step2": {
-        "title": "Desarrollo e Integración",
-        "desc": "Diseñamos y construimos soluciones personalizadas que se integran perfectamente con tus sistemas existentes."
-      },
-      "step3": {
-        "title": "Despliegue y Optimización",
-        "desc": "Implementamos, monitorizamos y optimizamos continuamente para garantizar resultados crecientes."
-      }
-    }
-  },
-  "logoStrip": {
-    "title": "Empresas que ya multiplicaron su eficiencia"
-  },
-  "problemSolution": {
-    "title": "De procesos lentos a <1>EfficiencIA</1> total",
-    "description": "Descubre cómo la automatización inteligente transforma la operación de tu empresa.",
-    "before": {
-      "title": "Sin automatización",
-      "items": {
-        "item1": "Horas perdidas en tareas manuales",
-        "item2": "Errores humanos frecuentes",
-        "item3": "Cuellos de botella operativos"
-      }
-    },
-    "after": {
-      "title": "Con EfficiencIA",
-      "items": {
-        "item1": "Procesos automatizados 24/7",
-        "item2": "Precisión garantizada con IA",
-        "item3": "Ahorro de costos y tiempo"
-      }
-    }
-  },
-  "services": {
-    "title": "Nuestros servicios",
-    "description": "Soluciones de automatización a medida para cada área de tu negocio.",
-    "items": {
-      "item1": {
-        "title": "Automatización de Procesos (RPA)",
-        "desc": "Eliminamos tareas repetitivas con bots inteligentes que trabajan por ti las 24 horas del día."
-      },
-      "item2": {
-        "title": "Integración de Sistemas",
-        "desc": "Conectamos todas tus herramientas y plataformas para que la información fluya sin fricciones."
-      },
-      "item3": {
-        "title": "Asistentes Virtuales y Bots",
-        "desc": "Chatbots y asistentes con IA que atienden clientes, clasifican datos y resuelven consultas."
-      },
-      "item4": {
-        "title": "Análisis de Datos Automatizado",
-        "desc": "Transforma tus datos en decisiones con reportes automáticos y dashboards inteligentes."
-      }
-    }
-  },
-  "testimonials": {
-    "title": "Lo que dicen nuestros <1>clientes</1>",
-    "description": "Resultados reales de empresas que confiaron en EfficiencIA.",
-    "items": {
-      "item1": {
-        "role": "CEO, Nodus Flex Center",
-        "quote": "Redujimos el tiempo de respuesta de mensajes en un 40%. El equipo ahora se enfoca en análisis estratégico."
-      },
-      "item2": {
-        "role": "Coordinadora, Nodus Flex Center",
-        "quote": "La automatización de facturación nos ahorró 120 horas al mes. El ROI fue visible desde el primer trimestre."
-      }
-    }
+  "notFound": {
+    "code": "ERROR 404",
+    "title": "Página no encontrada",
+    "description": "La página que buscas no existe o fue movida.",
+    "back": "Volver al inicio"
   }
 }

@@ -2,6 +2,14 @@ import { z } from 'zod';
 
 // Espejo del esquema de src/components/landing/ContactForm.tsx, pero validado
 // en el servidor: .strict() rechaza cualquier campo que no esperamos.
+// Plan elegido en la web: el servidor lo traduce a un texto legible para n8n.
+// Mantén estos precios sincronizados con src/lib/plans.ts.
+const PLANES = {
+    starter: "Inicial — $2,500 MXN/mes",
+    growth: "Crecimiento — $6,500 MXN/mes",
+    enterprise: "Empresarial — $14,900 MXN/mes",
+};
+
 const contactSchema = z.object({
     name: z.string().trim().min(1).max(100),
     number: z.string().regex(/^\d+$/).length(10),
@@ -9,6 +17,7 @@ const contactSchema = z.object({
     company: z.string().trim().max(100).optional(),
     message: z.string().trim().min(1).max(1000),
     captchaToken: z.string().min(1),
+    plan: z.enum(["starter", "growth", "enterprise"]).optional(),
 }).strict();
 
 export default async function handler(req, res) {
@@ -26,7 +35,8 @@ export default async function handler(req, res) {
         return res.status(400).json({ message: 'Datos inválidos.' });
     }
 
-    const { captchaToken, ...datosDelCliente } = parsed.data;
+    const { captchaToken, plan, ...resto } = parsed.data;
+    const datosDelCliente = plan ? { ...resto, plan: PLANES[plan] } : resto;
 
     try {
         // 3. El interrogatorio a Google (usamos tu clave secreta del .env)

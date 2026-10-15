@@ -1,113 +1,58 @@
-import { ArrowRight, Play } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { useTranslation, Trans } from "react-i18next";
-
-const Hero = ({ onCtaClick }: { onCtaClick?: () => void }) => {
+const Hero = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="relative overflow-hidden pt-28 md:pt-36 pb-16 md:pb-24 bg-surface">
-      {/* Decorative blobs */}
-      <div className="absolute top-20 -right-32 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-20 -left-32 w-80 h-80 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+  <>
+<section id="inicio" style={{ position: "relative", maxWidth: "1200px", margin: "0 auto", padding: "24px 24px 72px", minHeight: "calc(100svh - var(--hd-h, 76px))", display: "flex", alignItems: "center" }}>
+ <div className="grid-bg" aria-hidden="true" style={{ position: "absolute", inset: "-40px -200px 0 -200px", zIndex: "0" }}></div>
+ <div className="hero-out" style={{ position: "relative", zIndex: "1", width: "100%", display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,460px),1fr))", gap: "48px", alignItems: "center" }}>
+  <div>
+   <div className="in" style={{ "--d": "0", display: "inline-flex", alignItems: "center", gap: "8px", padding: "7px 14px", borderRadius: "999px", background: "rgba(16,183,127,.1)", border: "1px solid rgba(16,183,127,.25)", color: "#087A55", fontSize: "12px", fontWeight: "700", letterSpacing: ".08em" }}>
+    <span className="live" style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#10B77F" }}></span>{t("hero.badge")}
+   </div>
+   <h1 className="disp in" style={{ "--d": "1", margin: "18px 0 0", fontSize: "clamp(38px,4.7vw,66px)", lineHeight: "1", fontWeight: "800", textWrap: "balance" }}><Trans i18nKey="hero.title" components={{ b: <span style={{ color: "#0B8F63" }} /> }} /></h1>
+   <p className="in" style={{ "--d": "2", margin: "20px 0 0", maxWidth: "520px", fontSize: "17px", lineHeight: "1.6", color: "#47566B" }}><Trans i18nKey="hero.description" components={{ b: <strong style={{ color: "#121821" }} /> }} /></p>
+   <div className="in" style={{ "--d": "3", marginTop: "28px", display: "flex", flexWrap: "wrap", gap: "12px" }}>
+    <a className="btn btn-p" href="#contacto">{t("hero.start")}
+     <svg className="arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a className="btn btn-s" href="#casos">
+     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 5l12 7-12 7z"/></svg>{t("hero.cases")}</a>
+   </div>
+  </div>
 
-      <div className="section-container relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-
-          {/* Copy - Eliminamos ScrollReveal para que cargue al instante */}
-          <div className="max-w-xl animate-in fade-in duration-700">
-            <h1 className="inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full bg-primary/10 text-primary text-xs font-semibold tracking-wide uppercase">
-              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              {t("hero.badge")}
-            </h1>
-
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-6 text-foreground">
-              <Trans
-                i18nKey="hero.title"
-                components={{ 1: <span className="text-brand-ia" /> }}
-              />
-            </h2>
-
-            <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-              <Trans
-                i18nKey="hero.description"
-                components={{ 1: <strong className="text-foreground" /> }}
-              />
-            </p>
-
-            <div className="flex flex-wrap gap-4">
-              <Button size="lg" className="gap-2" onClick={onCtaClick}>
-                {t("hero.buttons.start")}
-                <ArrowRight size={18} aria-hidden="true" />
-              </Button>
-              <Button size="lg" variant="outline" className="gap-2" onClick={() => document.querySelector("#beneficios")?.scrollIntoView({ behavior: "smooth" })}>
-                <Play size={16} aria-hidden="true" />
-                {t("hero.buttons.cases")}
-              </Button>
-            </div>
-          </div>
-
-          {/* Visual - Eliminamos ScrollReveal */}
-          <div className="animate-in fade-in duration-1000 delay-200">
-            <HeroVisual />
-          </div>
-
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const HeroVisual = () => {
-  const { t } = useTranslation();
-  return (
-    <div className="relative flex items-center justify-center">
-      {/* Glow */}
-      <div className="absolute inset-0 bg-primary/10 rounded-3xl blur-2xl scale-90" />
-
-      <div className="relative w-full max-w-md mx-auto bg-card rounded-2xl border border-border shadow-xl p-6">
-        {/* Fake dashboard header */}
-        <div className="flex items-center gap-2 mb-6">
-          <div className="w-3 h-3 rounded-full bg-destructive/60" />
-          <div className="w-3 h-3 rounded-full bg-amber-400/60" />
-          <div className="w-3 h-3 rounded-full bg-primary/60" />
-          <span className="ml-auto text-xs text-muted-foreground font-medium">{t("hero.visual.header")}</span>
-        </div>
-
-        {/* Flow boxes */}
-        <div className="space-y-3">
-          {[
-            { label: t("hero.visual.steps.step1"), pct: 100 },
-            { label: t("hero.visual.steps.step2"), pct: 78 },
-            { label: t("hero.visual.steps.step3"), pct: 45 },
-          ].map((item, i) => (
-            <div key={i} className="bg-surface rounded-lg p-3">
-              <div className="flex justify-between text-sm mb-1">
-                <span className="font-medium text-foreground">{item.label}</span>
-                <span className="text-primary font-semibold">{item.pct}%</span>
-              </div>
-              <div className="w-full h-2 bg-border rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-primary rounded-full transition-all duration-1000 ease-out"
-                  style={{ width: `${item.pct}%` }}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Arrow connector */}
-        <div className="flex justify-center my-4">
-          <svg width="24" height="40" viewBox="0 0 24 40" className="text-primary">
-            <path d="M12 0 L12 32 M6 26 L12 34 L18 26" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </div>
-
-        <div className="bg-primary/10 rounded-lg p-3 text-center">
-          <span className="text-primary font-bold text-sm">{t("hero.visual.completed")}</span>
-        </div>
-      </div>
+  {/* Dashboard */}
+  <div className="float" style={{ position: "relative", width: "100%", maxWidth: "560px", margin: "0 auto" }}>
+   <div className="dash" style={{ background: "#fff", border: "1px solid #E1E7EF", borderRadius: "20px", padding: "22px 24px 24px", boxShadow: "0 40px 80px -40px rgba(18,24,33,.3),0 2px 6px rgba(18,24,33,.05)" }}>
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "22px" }}>
+     <div style={{ display: "flex", gap: "6px" }} aria-hidden="true"><i style={{ width: "10px", height: "10px", borderRadius: "50%", background: "rgba(239,67,67,.6)" }}></i><i style={{ width: "10px", height: "10px", borderRadius: "50%", background: "rgba(251,191,36,.6)" }}></i><i style={{ width: "10px", height: "10px", borderRadius: "50%", background: "rgba(16,183,127,.6)" }}></i></div>
+     <span style={{ fontSize: "12px", color: "#47566B" }}>{t("hero.dashboard")}</span>
     </div>
+    <div style={{ display: "grid", gap: "12px" }}>
+     <div style={{ padding: "14px 16px", borderRadius: "12px", background: "#F9FAFB" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", fontSize: "14px", fontWeight: "600" }}><span>{t("hero.step1")}</span><span className="pct p100 mono" style={{ fontSize: "13px", color: "#087A55" }}></span></div>
+      <div style={{ marginTop: "10px", height: "8px", borderRadius: "99px", background: "#E1E7EF", overflow: "hidden" }}><div className="bar" style={{ "--bd": "700ms", width: "100%", height: "100%", borderRadius: "99px", background: "#10B77F" }}></div></div>
+     </div>
+     <div style={{ padding: "14px 16px", borderRadius: "12px", background: "#F9FAFB" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", fontSize: "14px", fontWeight: "600" }}><span>{t("hero.step2")}</span><span className="pct p78 mono" style={{ "--bd": "1000ms", fontSize: "13px", color: "#087A55" }}></span></div>
+      <div style={{ marginTop: "10px", height: "8px", borderRadius: "99px", background: "#E1E7EF", overflow: "hidden" }}><div className="bar" style={{ "--bd": "1000ms", width: "78%", height: "100%", borderRadius: "99px", background: "#10B77F" }}></div></div>
+     </div>
+     <div style={{ padding: "14px 16px", borderRadius: "12px", background: "#F9FAFB" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", fontSize: "14px", fontWeight: "600" }}><span>{t("hero.step3")}</span><span className="pct p45 mono" style={{ "--bd": "1300ms", fontSize: "13px", color: "#087A55" }}></span></div>
+      <div style={{ marginTop: "10px", height: "8px", borderRadius: "99px", background: "#E1E7EF", overflow: "hidden" }}><div className="bar" style={{ "--bd": "1300ms", width: "45%", height: "100%", borderRadius: "99px", background: "#10B77F" }}></div></div>
+     </div>
+    </div>
+    <div style={{ display: "flex", justifyContent: "center", margin: "14px 0 10px" }} aria-hidden="true">
+     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#10B77F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path className="draw" d="M12 4v15M6 13l6 6 6-6"/></svg>
+    </div>
+    <div className="done" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", padding: "14px", borderRadius: "12px", background: "rgba(16,183,127,.1)", border: "1px solid rgba(16,183,127,.2)", color: "#087A55", fontWeight: "700", fontSize: "14px" }}>
+     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>{t("hero.done")}{" "}<span className="mono">3.2s</span>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+  </>
   );
 };
 
