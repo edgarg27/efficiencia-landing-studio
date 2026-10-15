@@ -1,69 +1,33 @@
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Card, CardContent } from "@/components/ui/card";
-import ScrollReveal from "@/components/ScrollReveal";
-import { useTranslation, Trans } from "react-i18next";
-
+import { useTranslation } from "react-i18next";
 const Testimonials = () => {
   const { t } = useTranslation();
 
-  const testimonials = [
-    {
-      name: "Gerardo",
-      role: t("testimonials.items.item1.role"),
-      initials: "G",
-      quote: t("testimonials.items.item1.quote"),
-    },
-    {
-      name: "Maribel",
-      role: t("testimonials.items.item2.role"),
-      initials: "M",
-      quote: t("testimonials.items.item2.quote"),
-    },
-  ];
-
   return (
-    <section className="section-padding bg-surface">
-      <div className="section-container">
-        <ScrollReveal>
-          <div className="text-center mb-14">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-4">
-              <Trans
-                i18nKey="testimonials.title"
-                components={{ 1: <span className="text-brand-ia" /> }}
-              />
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              {t("testimonials.description")}
-            </p>
-          </div>
-        </ScrollReveal>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
-          {testimonials.map((test, i) => (
-            <ScrollReveal key={i} delay={i * 100}>
-              <Card className="h-full border-border/60 shadow-md hover-lift">
-                <CardContent className="p-6 flex flex-col gap-4">
-                  <p className="italic text-foreground leading-relaxed">
-                    "{test.quote}"
-                  </p>
-                  <div className="flex items-center gap-3 mt-auto pt-4 border-t border-border/40">
-                    <Avatar className="h-10 w-10">
-                      <AvatarFallback className="bg-primary/10 text-primary text-sm font-bold">
-                        {test.initials}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <p className="text-sm font-bold text-foreground">{test.name}</p>
-                      <p className="text-xs text-muted-foreground">{test.role}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </ScrollReveal>
-          ))}
-        </div>
-      </div>
-    </section>
+  <>
+<section id="testimonios" style={{ maxWidth: "1200px", margin: "0 auto", padding: "120px 24px 40px" }}>
+ <div className="rv" style={{ maxWidth: "640px" }}>
+  <p style={{ margin: "0 0 14px", fontSize: "12px", fontWeight: "700", letterSpacing: ".1em", color: "#087A55" }}>{t("testimonials.label")}</p>
+  <h2 className="disp" style={{ margin: "0", fontSize: "clamp(34px,4.6vw,54px)", lineHeight: "1.04", fontWeight: "800", textWrap: "balance" }}>{t("testimonials.title")}</h2>
+  <p style={{ margin: "18px 0 0", fontSize: "17px", lineHeight: "1.6", color: "#47566B" }}>{t("testimonials.description")}</p>
+ </div>
+ <div style={{ marginTop: "48px", display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,420px),1fr))", gap: "20px" }}>
+  <figure className="card rv2" style={{ margin: "0", padding: "32px", borderRadius: "20px", border: "1px solid #E1E7EF", background: "#fff", display: "flex", flexDirection: "column", justifyContent: "space-between", gap: "28px" }}>
+   <div>
+    <div className="disp" style={{ fontSize: "56px", lineHeight: "1", fontWeight: "800", color: "#0B8F63" }}><span className="cnt k40" data-s="%"><span className="ph">40%</span></span></div>
+    <blockquote style={{ margin: "14px 0 0", fontSize: "18px", lineHeight: "1.55", fontWeight: "500" }}>{t("testimonials.quote1")}</blockquote>
+   </div>
+   <figcaption style={{ display: "flex", alignItems: "center", gap: "12px" }}><span style={{ width: "44px", height: "44px", borderRadius: "50%", display: "grid", placeItems: "center", background: "rgba(16,183,127,.12)", color: "#087A55", fontWeight: "700" }}>G</span><span><strong style={{ display: "block", fontSize: "15px" }}>Gerardo</strong><span style={{ fontSize: "13px", color: "#47566B" }}>{t("testimonials.role1")}</span></span></figcaption>
+  </figure>
+  <figure className="card rv3" style={{ margin: "0", padding: "32px", borderRadius: "20px", border: "1px solid #E1E7EF", background: "#fff", display: "flex", flexDirection: "column", justifyContent: "space-between", gap: "28px" }}>
+   <div>
+    <div className="disp" style={{ fontSize: "56px", lineHeight: "1", fontWeight: "800", color: "#0B8F63" }}><span className="cnt k120" data-s=" h"><span className="ph">120 h</span></span><span style={{ fontSize: "22px", fontWeight: "700", color: "#47566B" }}>{t("testimonials.perMonth")}</span></div>
+    <blockquote style={{ margin: "14px 0 0", fontSize: "18px", lineHeight: "1.55", fontWeight: "500" }}>{t("testimonials.quote2")}</blockquote>
+   </div>
+   <figcaption style={{ display: "flex", alignItems: "center", gap: "12px" }}><span style={{ width: "44px", height: "44px", borderRadius: "50%", display: "grid", placeItems: "center", background: "rgba(16,183,127,.12)", color: "#087A55", fontWeight: "700" }}>M</span><span><strong style={{ display: "block", fontSize: "15px" }}>Maribel</strong><span style={{ fontSize: "13px", color: "#47566B" }}>{t("testimonials.role2")}</span></span></figcaption>
+  </figure>
+ </div>
+</section>
+  </>
   );
 };
 
