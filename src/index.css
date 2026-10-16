@@ -188,3 +188,19 @@ select.field{appearance:none;-webkit-appearance:none;padding-right:42px;cursor:p
 /* El reCAPTCHA mide 304px: en pantallas angostas se reduce para no salirse de la tarjeta */
 @media (max-width:400px){.rc-wrap>div{transform:scale(.9);transform-origin:center top;margin-bottom:-8px}}
 @media (max-width:385px){.rc-wrap>div{transform:scale(.8);margin-bottom:-14px}}
+
+/* Sección de planes: nichos, promo de fundador, periodo de pago, instalación y confianza */
+.pl-chips{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.pl-chips li{font-size:13px;font-weight:600;color:#121821;background:#fff;border:1px solid #E1E7EF;border-radius:99px;padding:6px 12px}
+.pl-promo{margin-top:36px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px;padding:14px 20px;border-radius:14px;background:#0E1620;color:#fff;font-size:15px;line-height:1.5}
+.pl-promo b{color:#10B77F}
+.pl-pill{padding:4px 10px;border-radius:99px;background:#10B77F;color:#06231A;font-size:12px;font-weight:700;white-space:nowrap}
+.pl-toggle{margin-top:28px;display:inline-flex;padding:4px;border:1px solid #E1E7EF;border-radius:99px;background:#fff}
+.pl-toggle button{font:inherit;font-size:15px;font-weight:600;border:0;background:transparent;color:#47566B;min-height:44px;padding:0 20px;border-radius:99px;cursor:pointer;transition:background-color 160ms ease-out,color 160ms ease-out}
+.pl-toggle button[aria-checked="true"]{background:#0E1620;color:#fff}
+.pl-toggle small{margin-left:6px;font-size:12px;font-weight:700;color:#087A55}
+.pl-toggle button[aria-checked="true"] small{color:#7DE3B8}
+.pl-setup{margin:16px 0 22px;padding:10px 12px;border-radius:10px;background:#E8F8F1;color:#0B6B47;font-size:14px}
+.pl-setup s{opacity:.7;margin-right:2px}
+.pl-f .pl-setup{background:rgba(16,183,127,.14);color:#7DE3B8}
+.pl-trust{margin-top:48px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:20px}
