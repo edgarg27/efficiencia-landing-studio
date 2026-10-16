@@ -34,6 +34,7 @@ Tu workflow de n8n
 
 ```json
 {
+  "type": "company",
   "name": "Juan Pérez",
   "number": "5512345678",
   "email": "juan@empresa.com",
@@ -43,20 +44,35 @@ Tu workflow de n8n
 }
 ```
 
+Si el solicitante marca que **no** es una empresa, el payload conserva `email` pero no incluye `company`; puede traer el título del proyecto (opcional):
+
+```json
+{
+  "type": "individual",
+  "name": "Ana López",
+  "number": "5512345678",
+  "email": "ana@correo.com",
+  "message": "Quiero ordenar mis cotizaciones...",
+  "project": "Cotizador automático"
+}
+```
+
 ### Detalle de cada campo
 
 | Campo | Tipo | Reglas de validación | Obligatorio |
 |---|---|---|---|
 | `name` | string | 1–100 caracteres, se recorta espacios (`trim`) | Sí |
 | `number` | string | exactamente 10 dígitos, solo números (regex `^\d+$`) — sin espacios, guiones ni lada/código de país | Sí |
-| `email` | string | formato de email válido, máx. 255 caracteres | Sí |
-| `company` | string | máx. 100 caracteres | **No** — puede venir ausente/vacío |
+| `type` | string | `company` o `individual` (el solicitante indica si es para una empresa) | Sí |
+| `email` | string | formato de email válido, máx. 255 caracteres (corporativo si `type` = `company`; personal si es `individual`) | Sí |
+| `company` | string | 1–100 caracteres | **Solo si `type` = `company`** (obligatorio en ese caso) |
+| `project` | string | máx. 150 caracteres | **No** — solo si `type` = `individual` y escribió un título |
 | `message` | string | 1–1000 caracteres, se recorta espacios | Sí |
 | `plan` | string | `Inicial — $2,500 MXN/mes`, `Crecimiento — $6,500 MXN/mes` o `Empresarial — $14,900 MXN/mes` (el servidor traduce el plan elegido en la web) | **No** — solo viene si el usuario eligió un plan |
 
 Notas para diseñar el workflow:
 - `plan` es **opcional**: solo existe si el usuario eligió un plan en la sección de planes o en el formulario. Si cambias los precios en `src/lib/plans.ts`, actualiza también el mapa `PLANES` de `api/webhook.js`.
-- `company` es **opcional**: puede no venir en el JSON. El nodo que arme el workflow debe manejar el caso de que la propiedad no exista (no asumir que siempre está presente).
+- `company` solo existe si `type` = `company`; `project` solo si es `individual`. `email` viene siempre.
 - `number` siempre son 10 dígitos limpios (el frontend ya filtra cualquier caracter no numérico antes de enviarlo), así que no hace falta volver a limpiarlo en n8n, pero sí conviene no asumir un formato de lada específico (México, EE.UU., etc.) si tu workflow lo va a usar para marcar/enviar WhatsApp.
 - `captchaToken` **nunca llega a n8n** — se consume y se descarta en `/api/webhook` antes de reenviar.
 - No hay ningún campo de identificación de origen (IP, user-agent, timestamp) en el payload actual. Si tu workflow necesita alguno de esos, hay que agregarlo explícitamente en `api/webhook.js` (avísame si lo necesitas).

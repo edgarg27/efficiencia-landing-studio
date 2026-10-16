@@ -268,10 +268,16 @@
       "numberLength": "The number must have exactly 10 digits",
       "emailInvalid": "Enter a valid email",
       "messageRequired": "Tell us which process you want to automate",
-      "captchaRequired": "Please verify that you are not a robot"
+      "captchaRequired": "Please verify that you are not a robot",
+      "companyRequired": "Enter the company name"
     },
     "plan": "Plan of interest (optional)",
-    "planNone": "No preference"
+    "planNone": "No preference",
+    "isCompany": "Is this for a company?",
+    "typeCompany": "Yes, a company",
+    "typeIndividual": "No, it's personal",
+    "project": "Project title (optional)",
+    "emailPersonal": "Email"
   },
   "cta": {
     "title": "Ready to transform your company's workflow?",

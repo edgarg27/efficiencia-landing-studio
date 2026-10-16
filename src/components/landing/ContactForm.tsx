@@ -5,15 +5,20 @@ import { z } from "zod";
 import ReCAPTCHA from "react-google-recaptcha";
 import { formatPrice, monthlyPrice, PLAN_IDS, PLAN_NAME_KEY, selectPlan, useBilling, usePlan, type PlanId } from "@/lib/plans";
 
+type ContactType = "company" | "individual";
+const TYPES: ContactType[] = ["company", "individual"];
+
 const getContactSchema = (t: TFunction) =>
   z.object({
+    type: z.enum(["company", "individual"]),
     name: z.string().trim().min(1, t("form.errors.nameRequired")).max(100),
     number: z
       .string()
       .regex(/^\d+$/, t("form.errors.numberOnly"))
       .length(10, t("form.errors.numberLength")),
-    email: z.string().trim().email(t("form.errors.emailInvalid")).max(255),
-    company: z.string().trim().max(100).optional(),
+    email: z.string().trim().max(255),
+    company: z.string().trim().max(100),
+    project: z.string().trim().max(150),
     message: z.string().trim().min(1, t("form.errors.messageRequired")).max(1000),
     captchaToken: z.string().min(1, t("form.errors.captchaRequired")),
   });
@@ -21,7 +26,7 @@ const getContactSchema = (t: TFunction) =>
 type Values = z.infer<ReturnType<typeof getContactSchema>>;
 type Errors = Partial<Record<keyof Values, string>>;
 
-const emptyValues: Values = { name: "", number: "", email: "", company: "", message: "", captchaToken: "" };
+const emptyValues: Values = { type: "company", name: "", number: "", email: "", company: "", project: "", message: "", captchaToken: "" };
 
 const errStyle = { margin: "6px 0 0", fontSize: "13px", color: "#C73030" } as const;
 
@@ -74,19 +79,37 @@ const ContactForm = () => {
     setErrors((e) => ({ ...e, [key]: undefined }));
   };
 
+  const setType = (type: ContactType) => {
+    setValues((v) => ({ ...v, type }));
+    setErrors((e) => ({ ...e, email: undefined, company: undefined, project: undefined }));
+  };
+
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     const parsed = contactSchema.safeParse(values);
+    const next: Errors = {};
     if (!parsed.success) {
-      const next: Errors = {};
       for (const issue of parsed.error.issues) {
         const key = issue.path[0] as keyof Values;
         if (!next[key]) next[key] = issue.message;
       }
+    }
+    // El correo es obligatorio para todos; el nombre de la empresa, solo si es empresa.
+    if (!z.string().email().safeParse(values.email.trim()).success) next.email = t("form.errors.emailInvalid");
+    if (values.type === "company" && !values.company.trim()) next.company = t("form.errors.companyRequired");
+    if (!parsed.success || Object.keys(next).length > 0) {
       setErrors(next);
       setShowCaptcha(true);
       return;
     }
+
+    const d = parsed.data;
+    const base = { type: d.type, name: d.name, number: d.number, message: d.message, captchaToken: d.captchaToken, ...(plan ? { plan, billing } : {}) };
+    // Todos envían correo. Empresa: además el nombre de la empresa. Personal: el título del proyecto (si lo hay).
+    const payload =
+      d.type === "company"
+        ? { ...base, email: d.email, company: d.company }
+        : { ...base, email: d.email, ...(d.project ? { project: d.project } : {}) };
 
     setLoading(true);
     setFailed(false);
@@ -94,7 +117,7 @@ const ContactForm = () => {
       const res = await fetch("/api/webhook", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(plan ? { ...parsed.data, plan, billing } : parsed.data),
+        body: JSON.stringify(payload),
       });
       if (!res.ok) throw new Error("webhook");
       setSent(true);
@@ -129,21 +152,40 @@ const ContactForm = () => {
         <input className="field" id="f-nombre" name="nombre" type="text" autoComplete="name" required maxLength={100} value={values.name} onChange={(e) => set("name")(e.target.value)} aria-invalid={!!errors.name} />
         {errors.name && <p style={errStyle}>{errors.name}</p>}
       </div>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,200px),1fr))", gap: "18px" }}>
-        <div>
-          <label className="lbl" htmlFor="f-tel">{t("form.phone")}</label>
-          <input className="field" id="f-tel" name="tel" type="tel" inputMode="numeric" autoComplete="tel" required maxLength={10} value={values.number} onChange={(e) => set("number")(e.target.value.replace(/\D/g, "").slice(0, 10))} aria-invalid={!!errors.number} />
-          {errors.number && <p style={errStyle}>{errors.number}</p>}
+      <div>
+        <label className="lbl" htmlFor="f-tel">{t("form.phone")}</label>
+        <input className="field" id="f-tel" name="tel" type="tel" inputMode="numeric" autoComplete="tel" required maxLength={10} value={values.number} onChange={(e) => set("number")(e.target.value.replace(/\D/g, "").slice(0, 10))} aria-invalid={!!errors.number} />
+        {errors.number && <p style={errStyle}>{errors.number}</p>}
+      </div>
+      <fieldset className="seg-set">
+        <legend className="lbl">{t("form.isCompany")}</legend>
+        <div className="seg">
+          {TYPES.map((v) => (
+            <label key={v} className="seg-opt" data-on={values.type === v}>
+              <input type="radio" name="tipo" value={v} checked={values.type === v} onChange={() => setType(v)} />
+              <span>{t(v === "company" ? "form.typeCompany" : "form.typeIndividual")}</span>
+            </label>
+          ))}
         </div>
+      </fieldset>
+      <div key={values.type} className="fx-in" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,200px),1fr))", gap: "18px" }}>
         <div>
-          <label className="lbl" htmlFor="f-mail">{t("form.email")}</label>
+          <label className="lbl" htmlFor="f-mail">{values.type === "company" ? t("form.email") : t("form.emailPersonal")}</label>
           <input className="field" id="f-mail" name="mail" type="email" autoComplete="email" required maxLength={255} value={values.email} onChange={(e) => set("email")(e.target.value)} aria-invalid={!!errors.email} />
           {errors.email && <p style={errStyle}>{errors.email}</p>}
         </div>
-      </div>
-      <div>
-        <label className="lbl" htmlFor="f-emp">{t("form.company")}</label>
-        <input className="field" id="f-emp" name="empresa" type="text" autoComplete="organization" maxLength={100} value={values.company} onChange={(e) => set("company")(e.target.value)} />
+        {values.type === "company" ? (
+          <div>
+            <label className="lbl" htmlFor="f-emp">{t("form.company")}</label>
+            <input className="field" id="f-emp" name="empresa" type="text" autoComplete="organization" required maxLength={100} value={values.company} onChange={(e) => set("company")(e.target.value)} aria-invalid={!!errors.company} />
+            {errors.company && <p style={errStyle}>{errors.company}</p>}
+          </div>
+        ) : (
+          <div>
+            <label className="lbl" htmlFor="f-proj">{t("form.project")}</label>
+            <input className="field" id="f-proj" name="proyecto" type="text" maxLength={150} value={values.project} onChange={(e) => set("project")(e.target.value)} />
+          </div>
+        )}
       </div>
       <div>
         <label className="lbl" htmlFor="f-plan">{t("form.plan")}</label>

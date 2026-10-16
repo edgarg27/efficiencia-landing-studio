@@ -189,6 +189,19 @@ select.field{appearance:none;-webkit-appearance:none;padding-right:42px;cursor:p
 @media (max-width:400px){.rc-wrap>div{transform:scale(.9);transform-origin:center top;margin-bottom:-8px}}
 @media (max-width:385px){.rc-wrap>div{transform:scale(.8);margin-bottom:-14px}}
 
+/* Formulario: ¿es para una empresa? (control segmentado) */
+.seg-set{border:0;margin:0;padding:0;min-width:0}
+.seg-set legend{padding:0}
+.seg{display:grid;grid-template-columns:1fr 1fr;border:1px solid #E1E7EF;border-radius:12px;overflow:hidden;background:#fff}
+.seg-opt{position:relative;display:flex;align-items:center;justify-content:center;min-height:48px;padding:0 12px;text-align:center;font-size:14px;font-weight:600;line-height:1.2;color:#47566B;cursor:pointer;transition:background-color 160ms ease-out,color 160ms ease-out}
+.seg-opt+.seg-opt{border-left:1px solid #E1E7EF}
+.seg-opt input{position:absolute;inset:0;margin:0;opacity:0;cursor:pointer}
+.seg-opt[data-on="true"]{background:#F2FCF8;color:#087A55}
+.seg-opt:has(input:focus-visible){outline:3px solid rgba(16,183,127,.45);outline-offset:-3px}
+@media (hover:hover){.seg-opt[data-on="false"]:hover{color:#121821;background:#F9FAFB}}
+.fx-in{animation:rise 380ms var(--ease) both}
+@media (prefers-reduced-motion:reduce){.fx-in{animation:fadein 300ms ease-out both}}
+
 /* Sección de planes: nichos, promo de fundador, periodo de pago, instalación y confianza */
 .pl-chips{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
 .pl-chips li{font-size:13px;font-weight:600;color:#121821;background:#fff;border:1px solid #E1E7EF;border-radius:99px;padding:6px 12px}
