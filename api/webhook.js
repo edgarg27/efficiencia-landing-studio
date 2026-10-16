@@ -5,9 +5,9 @@ import { z } from 'zod';
 // Plan elegido en la web: el servidor lo traduce a un texto legible para n8n.
 // Mantén estos precios sincronizados con src/lib/plans.ts.
 const PLANES = {
-    starter: "Inicial — $2,500 MXN/mes",
-    growth: "Crecimiento — $6,500 MXN/mes",
-    enterprise: "Empresarial — $14,900 MXN/mes",
+    responde: { monthly: "Responde — $1,490 MXN/mes + IVA", annual: "Responde — pago anual $14,900 MXN + IVA" },
+    agenda: { monthly: "Agenda — $2,490 MXN/mes + IVA", annual: "Agenda — pago anual $24,900 MXN + IVA" },
+    vende: { monthly: "Vende — $3,990 MXN/mes + IVA", annual: "Vende — pago anual $39,900 MXN + IVA" },
 };
 
 const contactSchema = z.object({
@@ -19,7 +19,8 @@ const contactSchema = z.object({
     project: z.string().trim().max(150).optional(),
     message: z.string().trim().min(1).max(1000),
     captchaToken: z.string().min(1).max(4096),
-    plan: z.enum(["starter", "growth", "enterprise"]).optional(),
+    plan: z.enum(["responde", "agenda", "vende"]).optional(),
+    billing: z.enum(["monthly", "annual"]).optional(),
 }).strict().superRefine((v, ctx) => {
     const need = (k) => { if (!v[k]) ctx.addIssue({ code: 'custom', path: [k], message: 'required' }); };
     const deny = (k) => { if (v[k] !== undefined) ctx.addIssue({ code: 'custom', path: [k], message: 'not allowed' }); };
@@ -60,8 +61,8 @@ export default async function handler(req, res) {
         return res.status(400).json({ message: 'Datos inválidos.' });
     }
 
-    const { captchaToken, plan, ...resto } = parsed.data;
-    const datosDelCliente = plan ? { ...resto, plan: PLANES[plan] } : resto;
+    const { captchaToken, plan, billing = "monthly", ...resto } = parsed.data;
+    const datosDelCliente = plan ? { ...resto, plan: PLANES[plan][billing] } : resto;
 
     try {
         // 3. Verificación con Google: cuerpo URL-encoded (el secreto no va en la URL

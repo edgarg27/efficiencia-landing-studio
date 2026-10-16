@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import type { TFunction } from "i18next";
 import { z } from "zod";
 import ReCAPTCHA from "react-google-recaptcha";
-import { formatPrice, PLAN_IDS, PLAN_NAME_KEY, PLAN_PRICES, selectPlan, usePlan, type PlanId } from "@/lib/plans";
+import { formatPrice, monthlyPrice, PLAN_IDS, PLAN_NAME_KEY, selectPlan, useBilling, usePlan, type PlanId } from "@/lib/plans";
 
 type ContactType = "company" | "individual";
 const TYPES: ContactType[] = ["company", "individual"];
@@ -40,6 +40,7 @@ const ContactForm = () => {
   const [failed, setFailed] = useState(false);
   const [sent, setSent] = useState(false);
   const plan = usePlan();
+  const billing = useBilling();
   const [flash, setFlash] = useState(false);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   const formRef = useRef<HTMLFormElement>(null);
@@ -103,7 +104,7 @@ const ContactForm = () => {
     }
 
     const d = parsed.data;
-    const base = { type: d.type, name: d.name, number: d.number, message: d.message, captchaToken: d.captchaToken, ...(plan ? { plan } : {}) };
+    const base = { type: d.type, name: d.name, number: d.number, message: d.message, captchaToken: d.captchaToken, ...(plan ? { plan, billing } : {}) };
     // Todos envían correo. Empresa: además el nombre de la empresa. Personal: el título del proyecto (si lo hay).
     const payload =
       d.type === "company"
@@ -198,7 +199,7 @@ const ContactForm = () => {
           <option value="">{t("form.planNone")}</option>
           {PLAN_IDS.map((id) => (
             <option key={id} value={id}>
-              {t(PLAN_NAME_KEY[id])} — {formatPrice(PLAN_PRICES[id], i18n.language)} {t("plans.currency")} {t("plans.perMonth")}
+              {t(PLAN_NAME_KEY[id])} — {formatPrice(monthlyPrice(id, billing), i18n.language)} {t("plans.currency")} {t("plans.perMonth")}{billing === "annual" ? ` (${t("plans.annualShort")})` : ""}
             </option>
           ))}
         </select>
