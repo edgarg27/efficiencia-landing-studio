@@ -14,7 +14,7 @@ const Footer = () => {
   </div>
   <nav aria-label={t("footer.navLabel")}>
    <p style={{ margin: "0 0 14px", fontSize: "12px", fontWeight: "700", letterSpacing: ".1em" }}>{t("footer.navTitle")}</p>
-   <div className="nav" style={{ display: "grid", gap: "10px", fontSize: "14px", color: "#47566B" }}><a className="lnk blk" href="#beneficios">{t("footer.benefits")}</a><a className="lnk blk" href="#servicios">{t("footer.services")}</a><a className="lnk blk" href="#proceso">{t("footer.process")}</a><a className="lnk blk" href="#contacto">{t("footer.contact")}</a></div>
+   <div className="nav" style={{ display: "grid", gap: "10px", fontSize: "14px", color: "#47566B" }}><a className="lnk blk" href="#beneficios">{t("footer.benefits")}</a><a className="lnk blk" href="#servicios">{t("footer.services")}</a><a className="lnk blk" href="#proceso">{t("footer.process")}</a><a className="lnk blk" href="#nosotros">{t("footer.about")}</a><a className="lnk blk" href="#contacto">{t("footer.contact")}</a></div>
   </nav>
   <div>
    <p style={{ margin: "0 0 14px", fontSize: "12px", fontWeight: "700", letterSpacing: ".1em" }}>{t("footer.socialTitle")}</p>

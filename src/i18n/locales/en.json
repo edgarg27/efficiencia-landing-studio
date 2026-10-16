@@ -12,7 +12,8 @@
     "plans": "Plans",
     "process": "How it works",
     "cta": "Book a free audit",
-    "langLabel": "Language"
+    "langLabel": "Language",
+    "about": "About us"
   },
   "hero": {
     "badge": "BUSINESS AUTOMATION WITH AI",
@@ -57,93 +58,59 @@
   },
   "portfolio": {
     "label": "PORTFOLIO",
-    "title": "Chatbots that already talk for you",
-    "description": "Explore examples of AI assistants and see how they serve, sort and resolve in real time.",
-    "groupLabel": "Chatbot projects",
-    "note": "Illustrative examples. Replace each project with a real case from your portfolio.",
+    "title": "Projects already up and running",
+    "description": "Take a look at some of the solutions we have built, which work every day for our clients.",
+    "groupLabel": "Completed projects",
+    "note": "Projects built for Nodus.",
     "botName": "EfficiencIA Assistant",
     "status": "Online · replies in seconds",
     "placeholder": "Type your message…",
     "cases": [
       {
-        "title": "24/7 customer support",
-        "desc": "Answers frequently asked questions, checks orders and hands off to a person when needed.",
-        "tagA": "[Client]",
-        "tagB": "[Channel]",
+        "title": "Captive Center",
+        "desc": "Real estate marketplace that connects SMBs and startups looking for an industrial warehouse, office or retail space with owners and brokers, nationally and internationally. It includes map search with filters, listings reviewed before going live and lead tracking.",
+        "tagA": "Nodus",
+        "tagB": "Web platform",
+        "img": "/proyectos/captive.jpg",
+        "imgAlt": "Captive Center home page"
+      },
+      {
+        "title": "Nodus Flex Center virtual assistant",
+        "desc": "AI assistant on WhatsApp, using the same number across all of the company's social networks. It answers prospects' questions about offices and workspaces and registers them as leads. Today it is the channel new clients come through.",
+        "tagA": "Nodus Flex Center",
+        "tagB": "WhatsApp chatbot",
+        "botName": "Nodus Flex Center Assistant",
+        "status": "WhatsApp · replies in seconds",
         "msgs": [
           {
             "from": "b",
-            "text": "Hi, I'm [Client]'s assistant. How can I help you today?"
+            "text": "Hi! I'm the Nodus Flex Center assistant. Are you looking for a private office, coworking or a meeting room?"
           },
           {
             "from": "u",
-            "text": "Where is my order?"
+            "text": "An office for 4 people"
           },
           {
             "from": "b",
-            "text": "Sure. Can you share your order number?"
+            "text": "We have private offices ready to move in. When do you need it?"
           },
           {
             "from": "u",
-            "text": "#12345"
+            "text": "Next month"
           },
           {
             "from": "b",
-            "text": "Your order shipped today and arrives tomorrow. Want me to notify you when it's on its way?"
+            "text": "Done, I've saved your details. An advisor will contact you to schedule a tour of the center."
           }
         ]
       },
       {
-        "title": "Lead qualification",
-        "desc": "Asks the right questions, qualifies the prospect and books a call with sales.",
-        "tagA": "[Client]",
-        "tagB": "[Channel]",
-        "msgs": [
-          {
-            "from": "b",
-            "text": "Hi! Tell me, which process would you like to automate?"
-          },
-          {
-            "from": "u",
-            "text": "Our manual invoicing"
-          },
-          {
-            "from": "b",
-            "text": "Got it. Roughly how many invoices do you issue per month?"
-          },
-          {
-            "from": "u",
-            "text": "About 300"
-          },
-          {
-            "from": "b",
-            "text": "Great. I can book you a free audit with an expert. Do you prefer tomorrow or Thursday?"
-          }
-        ]
-      },
-      {
-        "title": "Internal assistant",
-        "desc": "Answers team questions about policies, processes and tools, instantly.",
-        "tagA": "[Client]",
-        "tagB": "[Channel]",
-        "msgs": [
-          {
-            "from": "u",
-            "text": "How do I request time off?"
-          },
-          {
-            "from": "b",
-            "text": "Go to the HR portal and choose \"New request\". Your manager approves it within one business day."
-          },
-          {
-            "from": "u",
-            "text": "And how many days do I have left?"
-          },
-          {
-            "from": "b",
-            "text": "Checking your balance… do you want me to email it to you as well?"
-          }
-        ]
+        "title": "Nodus Flex Center app",
+        "desc": "Platform that runs the business center's operation in one place: leads and quotes, contracts, billing and invoicing, room bookings, parcels and support. Each client also has their own portal to check their account, pay and book online.",
+        "tagA": "Nodus Flex Center",
+        "tagB": "Management system",
+        "img": "/proyectos/nodus-app.jpg",
+        "imgAlt": "Nodus Flex Center app dashboard"
       }
     ]
   },
@@ -158,6 +125,32 @@
     "step2Desc": "We design and build custom solutions that integrate seamlessly with your existing systems.",
     "step3Title": "Deployment and Optimization",
     "step3Desc": "We deploy, monitor and continuously optimize to guarantee growing results."
+  },
+  "about": {
+    "label": "ABOUT US",
+    "title": "AI-powered automation, tailored to your operation",
+    "description": "EfficiencIA was founded in 2025 with a clear goal: helping companies work more efficiently with artificial intelligence. We are a young company, but our projects are already running in the real world: from websites and virtual assistants that attract and serve new customers, to complete systems that run a business end to end.",
+    "facts": [
+      {
+        "value": "2025",
+        "label": "The year we started automating processes with AI."
+      },
+      {
+        "value": "3 projects",
+        "label": "In production and used every day."
+      },
+      {
+        "value": "Tailored",
+        "label": "Every solution is designed around your company's operation, no generic templates."
+      }
+    ],
+    "toolsLabel": "WE WORK WITH",
+    "tools": [
+      "WhatsApp",
+      "ManyChat",
+      "n8n",
+      "Supabase"
+    ]
   },
   "testimonials": {
     "label": "CLIENTS",
@@ -246,7 +239,8 @@
     "process": "How it works",
     "contact": "Contact",
     "socialTitle": "FOLLOW US",
-    "rights": "© {{year}} EfficiencIA. All rights reserved."
+    "rights": "© {{year}} EfficiencIA. All rights reserved.",
+    "about": "About us"
   },
   "privacyPage": {
     "metaTitle": "Privacy notice | EfficiencIA",

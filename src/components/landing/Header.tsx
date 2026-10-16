@@ -7,6 +7,7 @@ const NAV = [
   { id: "servicios", key: "header.services" },
   { id: "portafolio", key: "header.portfolio" },
   { id: "proceso", key: "header.process" },
+  { id: "nosotros", key: "header.about" },
   { id: "planes", key: "header.plans" },
 ] as const;
 

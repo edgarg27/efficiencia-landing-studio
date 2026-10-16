@@ -5,6 +5,7 @@ import ProblemSolution from "@/components/landing/ProblemSolution";
 import Services from "@/components/landing/Services";
 import Portfolio from "@/components/landing/Portfolio";
 import HowWeWork from "@/components/landing/HowWeWork";
+import About from "@/components/landing/About";
 import Testimonials from "@/components/landing/Testimonials";
 import Plans from "@/components/landing/Plans";
 import ContactSection from "@/components/landing/ContactSection";
@@ -27,6 +28,7 @@ const Index = () => {
       <Services />
       <Portfolio />
       <HowWeWork />
+      <About />
       <Testimonials />
       <Plans />
       <ContactSection />
