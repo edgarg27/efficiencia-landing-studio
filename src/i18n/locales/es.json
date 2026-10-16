@@ -201,7 +201,7 @@
     "free": "GRATIS",
     "founder": "precio fundador",
     "cta": "Quiero {{name}}",
-    "p1Name": "Responde",
+    "p1Name": "Básico",
     "p1Desc": "Para dejar de contestar lo mismo todo el día.",
     "p1f": [
       "Contesta 24/7 con IA, como si fueras tú",
@@ -210,10 +210,10 @@
       "Te avisa cuando alguien quiere hablar contigo",
       "1,000 mensajes de WhatsApp incluidos"
     ],
-    "p2Name": "Agenda",
+    "p2Name": "Pro",
     "p2Desc": "Para que tu agenda se llene sola, de día y de noche.",
     "p2f": [
-      "Todo lo de Responde",
+      "Todo lo del plan Básico",
       "Agenda, reagenda y cancela en tu calendario",
       "Recordatorios 24 h y 2 h antes: menos clientes que no llegan",
       "Hasta 3 agendas de tu equipo",
@@ -221,10 +221,10 @@
       "2,500 mensajes de WhatsApp incluidos"
     ],
     "roi": "Cuesta menos de <b>{{price}} al día</b>. Con que recupere las citas que hoy se te van por no contestar a tiempo, <b>se paga solo</b>.",
-    "p3Name": "Vende",
+    "p3Name": "VIP",
     "p3Desc": "Para que tus clientes regresen y gasten más en cada visita.",
     "p3f": [
-      "Todo lo de Agenda",
+      "Todo lo del plan Pro",
       "Sugiere servicios extra al agendar",
       "Felicita a tus clientes en su cumpleaños con una promo",
       "Recupera clientes que no vuelven en 45 días",

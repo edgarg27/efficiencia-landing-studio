@@ -201,7 +201,7 @@
     "free": "FREE",
     "founder": "founder price",
     "cta": "I want {{name}}",
-    "p1Name": "Responde",
+    "p1Name": "Basic",
     "p1Desc": "Stop answering the same questions all day.",
     "p1f": [
       "Replies 24/7 with AI, just like you would",
@@ -210,10 +210,10 @@
       "Alerts you when someone wants to talk to you",
       "1,000 WhatsApp messages included"
     ],
-    "p2Name": "Agenda",
+    "p2Name": "Pro",
     "p2Desc": "So your calendar fills itself, day and night.",
     "p2f": [
-      "Everything in Responde",
+      "Everything in Basic",
       "Books, reschedules and cancels in your calendar",
       "Reminders 24 h and 2 h before: fewer no-shows",
       "Up to 3 team calendars",
@@ -221,10 +221,10 @@
       "2,500 WhatsApp messages included"
     ],
     "roi": "Costs less than <b>{{price}} a day</b>. Just by recovering the appointments you lose today by not replying in time, <b>it pays for itself</b>.",
-    "p3Name": "Vende",
+    "p3Name": "VIP",
     "p3Desc": "So your clients come back and spend more on each visit.",
     "p3f": [
-      "Everything in Agenda",
+      "Everything in Pro",
       "Suggests add-on services when booking",
       "Sends birthday greetings with a promo",
       "Wins back clients who haven't returned in 45 days",
