@@ -26,9 +26,9 @@ const Index = () => {
       <LogoStrip />
       <ProblemSolution />
       <Services />
+      <About />
       <Portfolio />
       <HowWeWork />
-      <About />
       <Testimonials />
       <Plans />
       <ContactSection />
