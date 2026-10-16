@@ -5,6 +5,7 @@ import { LANGS } from "@/i18n";
 const NAV = [
   { id: "beneficios", key: "header.benefits" },
   { id: "servicios", key: "header.services" },
+  { id: "nosotros", key: "header.about" },
   { id: "portafolio", key: "header.portfolio" },
   { id: "proceso", key: "header.process" },
   { id: "planes", key: "header.plans" },
