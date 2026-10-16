@@ -26,3 +26,18 @@ dist-ssr
 .vercel
 .env*.local
 .env*
+
+# Claves, credenciales y configuración local
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+id_rsa*
+id_ed25519*
+credentials*.json
+service-account*.json
+.npmrc
+.pypirc
+.claude/settings.local.json
+!.env.example

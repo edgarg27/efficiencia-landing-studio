@@ -16,14 +16,26 @@ const contactSchema = z.object({
     email: z.string().trim().email().max(255),
     company: z.string().trim().max(100).optional(),
     message: z.string().trim().min(1).max(1000),
-    captchaToken: z.string().min(1),
+    captchaToken: z.string().min(1).max(4096),
     plan: z.enum(["starter", "growth", "enterprise"]).optional(),
 }).strict();
 
+// Logs estructurados y sin datos personales (solo nombres de campo / códigos).
+const log = (level, event, data = {}) => console[level](JSON.stringify({ event, ...data }));
+
 export default async function handler(req, res) {
+    res.setHeader('Cache-Control', 'no-store');
+
     // 1. Por seguridad, solo permitimos envíos POST
     if (req.method !== 'POST') {
+        res.setHeader('Allow', 'POST');
         return res.status(405).json({ error: 'Método no permitido' });
+    }
+
+    const { RECAPTCHA_SECRET_KEY, N8N_WEBHOOK_URL, N8N_WEBHOOK_SECRET, RECAPTCHA_HOSTNAMES } = process.env;
+    if (!RECAPTCHA_SECRET_KEY || !N8N_WEBHOOK_URL) {
+        log('error', 'config_missing', { recaptcha: !!RECAPTCHA_SECRET_KEY, n8nUrl: !!N8N_WEBHOOK_URL });
+        return res.status(503).json({ error: 'Servicio no disponible' });
     }
 
     // 2. Validamos la forma completa del body ANTES de tocar reCAPTCHA o n8n.
@@ -32,6 +44,7 @@ export default async function handler(req, res) {
     // a este endpoint directamente.
     const parsed = contactSchema.safeParse(req.body);
     if (!parsed.success) {
+        log('warn', 'validation_failed', { fields: parsed.error.issues.map((i) => i.path.join('.')) });
         return res.status(400).json({ message: 'Datos inválidos.' });
     }
 
@@ -39,45 +52,53 @@ export default async function handler(req, res) {
     const datosDelCliente = plan ? { ...resto, plan: PLANES[plan] } : resto;
 
     try {
-        // 3. El interrogatorio a Google (usamos tu clave secreta del .env)
-        // Nota: La API de Google requiere que mandemos los datos en la URL
-        const urlGoogle = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${captchaToken}`;
-
-        const respuestaGoogle = await fetch(urlGoogle, {
+        // 3. Verificación con Google: cuerpo URL-encoded (el secreto no va en la URL
+        // y el token no puede inyectar parámetros).
+        const respuestaGoogle = await fetch('https://www.google.com/recaptcha/api/siteverify', {
             method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({ secret: RECAPTCHA_SECRET_KEY, response: captchaToken }),
+            signal: AbortSignal.timeout(5000),
         });
-
         const datosGoogle = await respuestaGoogle.json();
 
+        // Opcional: RECAPTCHA_HOSTNAMES="efficiencia.cloud,www.efficiencia.cloud" exige que
+        // el token se haya resuelto en tu dominio.
+        const hosts = RECAPTCHA_HOSTNAMES ? RECAPTCHA_HOSTNAMES.split(',').map((h) => h.trim()) : null;
+        const hostOk = !hosts || hosts.includes(datosGoogle.hostname);
+
         // 4. El veredicto de Google
-        if (!datosGoogle.success) {
-            console.error('Intento de bot bloqueado:', datosGoogle['error-codes']);
+        if (datosGoogle.success !== true || !hostOk) {
+            const codes = datosGoogle['error-codes'] ?? [];
+            const configError = codes.includes('invalid-input-secret') || codes.includes('missing-input-secret');
+            log(configError ? 'error' : 'warn', configError ? 'captcha_config_error' : 'captcha_failed', { codes });
             return res.status(400).json({ message: 'No pasaste la prueba de reCAPTCHA. ¿Eres un robot?' });
         }
 
-
-        // 2. Tomamos la URL de n8n desde una variable privada del servidor
-        const n8nUrl = process.env.N8N_WEBHOOK_URL;
-
-        // 3. Vercel hace la llamada hacia n8n de forma invisible para el usuario
-        const n8nResponse = await fetch(n8nUrl, {
+        // 5. Vercel llama a n8n de forma invisible para el usuario. Si N8N_WEBHOOK_SECRET
+        // está definido, se envía como cabecera (configura Header Auth en el nodo Webhook).
+        const n8nResponse = await fetch(N8N_WEBHOOK_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                ...(N8N_WEBHOOK_SECRET ? { 'X-Webhook-Secret': N8N_WEBHOOK_SECRET } : {}),
             },
-            // Pasamos los datos que nos envió el formulario en React
-            body: JSON.stringify(datosDelCliente)
+            body: JSON.stringify(datosDelCliente),
+            signal: AbortSignal.timeout(8000),
         });
 
         if (!n8nResponse.ok) {
-            return res.status(500).json({ error: 'Error al comunicarse con n8n' });
+            log('error', 'n8n_forward_failed', { status: n8nResponse.status });
+            return res.status(502).json({ error: 'Error al comunicarse con n8n' });
         }
 
-        // 4. Le avisamos a React que todo salió perfecto
         return res.status(200).json({ exito: true });
 
     } catch (error) {
-        console.error("Error en el servidor:", error.message);
-        return res.status(500).json({ error: 'Error interno de conexión' });
+        const timeout = error.name === 'TimeoutError';
+        log('error', timeout ? 'upstream_timeout' : 'webhook_exception', { name: error.name, msg: error.message });
+        return res.status(timeout ? 504 : 500).json({
+            error: timeout ? 'Tiempo de espera agotado' : 'Error interno de conexión',
+        });
     }
 }

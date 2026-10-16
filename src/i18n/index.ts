@@ -38,6 +38,7 @@ i18n.use(initReactI18next).init({
   lng: initialLang(),
   fallbackLng: "es",
   interpolation: { escapeValue: false },
+  showSupportNotice: false,
 });
 
 syncDocument(i18n.language);

@@ -1,7 +1,6 @@
 import { defineConfig, loadEnv, type Plugin } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
-import { componentTagger } from "lovable-tagger";
 
 // En desarrollo Vite no sirve las funciones serverless de Vercel (/api/*).
 // Este plugin ejecuta api/webhook.js localmente, con las variables de .env,
@@ -10,10 +9,22 @@ const devApi = (env: Record<string, string>): Plugin => ({
   name: "dev-api-webhook",
   apply: "serve",
   configureServer(server) {
-    Object.assign(process.env, env);
+    for (const k of ["RECAPTCHA_SECRET_KEY", "N8N_WEBHOOK_URL", "N8N_WEBHOOK_SECRET", "RECAPTCHA_HOSTNAMES"]) {
+      if (env[k]) process.env[k] = env[k];
+    }
     server.middlewares.use("/api/webhook", async (req, res) => {
+      if (req.method === "POST" && !String(req.headers["content-type"] ?? "").startsWith("application/json")) {
+        res.statusCode = 415;
+        return res.end();
+      }
       let raw = "";
-      for await (const chunk of req) raw += chunk;
+      for await (const chunk of req) {
+        raw += chunk;
+        if (raw.length > 16_384) {
+          res.statusCode = 413;
+          return res.end();
+        }
+      }
       let body: unknown;
       try {
         body = raw ? JSON.parse(raw) : undefined;
@@ -51,7 +62,6 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react(),
-    mode === "development" && componentTagger(),
     mode === "development" && devApi(loadEnv(mode, process.cwd(), "")),
   ].filter(Boolean),
   resolve: {
