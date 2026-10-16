@@ -227,10 +227,16 @@
       "numberLength": "El número debe tener exactamente 10 dígitos",
       "emailInvalid": "Ingresa un correo válido",
       "messageRequired": "Cuéntanos qué proceso quieres automatizar",
-      "captchaRequired": "Por favor, verifica que no eres un robot"
+      "captchaRequired": "Por favor, verifica que no eres un robot",
+      "companyRequired": "Ingresa el nombre de la empresa"
     },
     "plan": "Plan de interés (opcional)",
-    "planNone": "Sin preferencia"
+    "planNone": "Sin preferencia",
+    "isCompany": "¿Es para una empresa?",
+    "typeCompany": "Sí, es una empresa",
+    "typeIndividual": "No, es personal",
+    "project": "Título del proyecto (opcional)",
+    "emailPersonal": "Correo electrónico"
   },
   "cta": {
     "title": "¿Listo para transformar el flujo de trabajo de tu empresa?",
