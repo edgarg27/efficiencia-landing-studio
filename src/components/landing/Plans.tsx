@@ -8,8 +8,6 @@ import {
   selectPlan,
   useBilling,
   usePlan,
-  WA_NUMBER,
-  waLink,
   type PlanId,
 } from "@/lib/plans";
 
@@ -89,13 +87,6 @@ const Plans = () => {
     {t("plans.trialTitle")}
    </h3>
    <p style={{ margin: "0", fontSize: "15px", lineHeight: "1.6", color: "#47566B" }}>{t("plans.trialText")}</p>
-  </div>
-  <div className="rv2" style={{ padding: "28px", borderRadius: "20px", border: "1px solid #BFEBD7", background: "#F4FBF8" }}>
-   <h3 className="disp" style={{ margin: "0 0 8px", fontSize: "19px", fontWeight: "700" }}>{t("plans.tryTitle")}</h3>
-   <p style={{ margin: "0 0 16px", fontSize: "15px", lineHeight: "1.6", color: "#47566B" }}>{t(WA_NUMBER ? "plans.tryText" : "plans.tryTextForm")}</p>
-   {WA_NUMBER
-    ? <a className="btn btn-p" href={waLink(t("plans.tryMessage"))} target="_blank" rel="noopener noreferrer" style={{ width: "100%" }}>{t("plans.tryCta")}</a>
-    : <a className="btn btn-p" href="#contacto" style={{ width: "100%" }}>{t("plans.tryCtaForm")}</a>}
   </div>
  </div>
 
