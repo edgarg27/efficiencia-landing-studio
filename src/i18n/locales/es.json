@@ -228,12 +228,6 @@
     ],
     "trialTitle": "Pruébalo 15 días gratis",
     "trialText": "Instalamos tu bot y lo usas 15 días en tu negocio sin pagar mensualidad. Si no te convence, lo cancelas y no pagas nada. Así de fácil.",
-    "tryTitle": "¿Quieres verlo antes de decidir?",
-    "tryText": "Escríbele a nuestro bot y agenda una cita de prueba. Tarda menos de un minuto.",
-    "tryTextForm": "Déjanos tus datos y te mostramos el bot funcionando con una cita de prueba.",
-    "tryCta": "Probar el bot por WhatsApp",
-    "tryCtaForm": "Quiero ver una demo",
-    "tryMessage": "Hola, quiero probar el bot y agendar una cita de prueba.",
     "note": "Precios en pesos mexicanos más IVA. Cada plan incluye el costo de los mensajes de WhatsApp hasta su límite mensual; mensajes adicionales a $0.50 MXN. Prueba gratis de 15 días para negocios nuevos; la mensualidad inicia a partir del día 16. Instalación gratis de fundador sujeta a contrato mínimo de 6 meses al terminar la prueba.",
     "currency": "MXN",
     "selected": "Plan elegido"

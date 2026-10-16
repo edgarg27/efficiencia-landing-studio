@@ -21,12 +21,6 @@ export const monthlyPrice = (id: PlanId, billing: Billing) =>
 // Lugares que quedan con instalación gratis (precio fundador). Actualízalo conforme vendas.
 export const FOUNDER_SPOTS = 10;
 
-// WhatsApp del bot de prueba: 52 + 10 dígitos, sin espacios. Vacío = el botón lleva al formulario.
-export const WA_NUMBER = "";
-
-export const waLink = (text: string) =>
-  `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
-
 // Clave de i18n con el nombre de cada plan.
 export const PLAN_NAME_KEY: Record<PlanId, string> = {
   responde: "plans.p1Name",

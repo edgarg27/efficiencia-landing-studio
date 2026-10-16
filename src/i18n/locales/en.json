@@ -228,12 +228,6 @@
     ],
     "trialTitle": "Try it free for 15 days",
     "trialText": "We set up your bot and you use it in your business for 15 days without paying a monthly fee. If you're not convinced, cancel and pay nothing. That simple.",
-    "tryTitle": "Want to see it before deciding?",
-    "tryText": "Message our bot and book a test appointment. It takes less than a minute.",
-    "tryTextForm": "Leave us your details and we'll show you the bot working with a test appointment.",
-    "tryCta": "Try the bot on WhatsApp",
-    "tryCtaForm": "I want a demo",
-    "tryMessage": "Hi, I'd like to try the bot and book a test appointment.",
     "note": "Prices in Mexican pesos plus VAT. Each plan includes WhatsApp message costs up to its monthly limit; extra messages at $0.50 MXN. 15-day free trial for new businesses; the monthly fee starts on day 16. Free founder setup requires a 6-month minimum contract after the trial.",
     "currency": "MXN",
     "selected": "Selected plan"
