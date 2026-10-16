@@ -79,7 +79,7 @@
         "desc": "Asistente con IA en WhatsApp, con el mismo número en todas las redes sociales de la empresa. Atiende a los interesados, resuelve sus dudas sobre oficinas y espacios de trabajo, y los registra como prospectos. Hoy es el canal por el que llegan los nuevos clientes.",
         "tagA": "Nodus Flex Center",
         "tagB": "Chatbot en WhatsApp",
-        "botName": "Asistente Nodus Flex Center",
+        "botName": "NodusBot",
         "status": "WhatsApp · responde en segundos",
         "msgs": [
           {
@@ -102,7 +102,8 @@
             "from": "b",
             "text": "Listo, ya registré tus datos. Un asesor te contactará para agendar un recorrido por el centro."
           }
-        ]
+        ],
+        "avatar": "/proyectos/nodusbot.png"
       },
       {
         "title": "App de Nodus Flex Center",

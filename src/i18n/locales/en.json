@@ -79,7 +79,7 @@
         "desc": "AI assistant on WhatsApp, using the same number across all of the company's social networks. It answers prospects' questions about offices and workspaces and registers them as leads. Today it is the channel new clients come through.",
         "tagA": "Nodus Flex Center",
         "tagB": "WhatsApp chatbot",
-        "botName": "Nodus Flex Center Assistant",
+        "botName": "NodusBot",
         "status": "WhatsApp · replies in seconds",
         "msgs": [
           {
@@ -102,7 +102,8 @@
             "from": "b",
             "text": "Done, I've saved your details. An advisor will contact you to schedule a tour of the center."
           }
-        ]
+        ],
+        "avatar": "/proyectos/nodusbot.png"
       },
       {
         "title": "Nodus Flex Center app",

@@ -3,7 +3,7 @@ import { Fragment, useState } from "react";
 
 type Msg = { from: "b" | "u"; text: string };
 // Cada proyecto se muestra como conversación de chat (msgs) o como captura de pantalla (img).
-type CaseData = { title: string; desc: string; tagA: string; tagB: string; msgs?: Msg[]; img?: string; imgAlt?: string; botName?: string; status?: string };
+type CaseData = { title: string; desc: string; tagA: string; tagB: string; msgs?: Msg[]; img?: string; imgAlt?: string; avatar?: string; botName?: string; status?: string };
 
 
 const Portfolio = () => {
@@ -14,7 +14,7 @@ const Portfolio = () => {
     num: "0" + (i + 1), title: d.title, desc: d.desc, tagA: d.tagA, tagB: d.tagB,
     tabClass: active === i ? "cs on" : "cs", pressed: active === i, show: active === i,
     pick: () => setActive(i),
-    img: d.img, imgAlt: d.imgAlt ?? "", botName: d.botName ?? t("portfolio.botName"), status: d.status ?? t("portfolio.status"),
+    img: d.img, imgAlt: d.imgAlt ?? "", avatar: d.avatar, botName: d.botName ?? t("portfolio.botName"), status: d.status ?? t("portfolio.status"),
     messages: (d.msgs ?? []).map((m, j) => ({ text: m.text, cls: m.from === "b" ? "mb" : "mu", delay: 200 + j * 650 + "ms" })),
   }));
 
@@ -60,8 +60,12 @@ const Portfolio = () => {
   {/* Ventana de chat */}
   <div style={{ border: "1px solid #E1E7EF", borderRadius: "24px", background: "#fff", boxShadow: "0 40px 80px -48px rgba(18,24,33,.3),0 2px 6px rgba(18,24,33,.05)", overflow: "hidden" }}>
    <div style={{ display: "flex", alignItems: "center", gap: "12px", padding: "16px 20px", background: "#0E1620", color: "#fff" }}>
-    <span style={{ width: "40px", height: "40px", borderRadius: "12px", display: "grid", placeItems: "center", background: "#10B77F" }}><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 8V5M9 13v1M15 13v1"/><circle cx="12" cy="4" r="1"/></svg></span>
+    {c.avatar
+     ? <img src={c.avatar} alt="" width={40} height={40} style={{ width: "40px", height: "40px", borderRadius: "50%", border: "1px solid rgba(255,255,255,.18)", flex: "0 0 auto" }} />
+     : <span style={{ width: "40px", height: "40px", borderRadius: "12px", display: "grid", placeItems: "center", background: "#10B77F" }}><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 8V5M9 13v1M15 13v1"/><circle cx="12" cy="4" r="1"/></svg></span>}
     <span><strong style={{ display: "block", fontSize: "15px" }}>{c.botName}</strong><span style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "12px", color: "#A9B6C8" }}><i className="live" style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#34D399" }}></i>{c.status}</span></span>
+    {/* Iconos decorativos de WhatsApp (buscar y menú) */}
+    {c.avatar && (<span aria-hidden="true" style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: "18px", color: "#fff" }}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></span>)}
    </div>
    <div aria-live="polite" style={{ minHeight: "440px", padding: "22px 20px", background: "#F9FAFB", display: "flex", flexDirection: "column" }}>
     <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
