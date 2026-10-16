@@ -1,14 +1,7 @@
-import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 const NotFound = () => {
-  const location = useLocation();
   const { t } = useTranslation();
-
-  useEffect(() => {
-    console.error("404 Error: User attempted to access non-existent route:", location.pathname);
-  }, [location.pathname]);
 
   return (
     <main style={{ minHeight: "100vh", display: "grid", placeItems: "center", background: "#F9FAFB", padding: "24px" }}>
