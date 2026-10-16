@@ -12,7 +12,8 @@
     "plans": "Planes",
     "process": "Cómo funciona",
     "cta": "Agenda una auditoría gratuita",
-    "langLabel": "Idioma"
+    "langLabel": "Idioma",
+    "about": "Nosotros"
   },
   "hero": {
     "badge": "AUTOMATIZACIÓN EMPRESARIAL CON IA",
@@ -57,93 +58,60 @@
   },
   "portfolio": {
     "label": "PORTAFOLIO",
-    "title": "Chatbots que ya conversan por ti",
-    "description": "Explora ejemplos de asistentes con IA y mira cómo atienden, clasifican y resuelven en tiempo real.",
-    "groupLabel": "Proyectos de chatbot",
-    "note": "Ejemplos ilustrativos. Sustituye cada proyecto por un caso real de tu portafolio.",
+    "title": "Proyectos que ya están en operación",
+    "description": "Conoce algunas de las soluciones que hemos desarrollado y que hoy trabajan todos los días para nuestros clientes.",
+    "groupLabel": "Proyectos realizados",
+    "note": "Proyectos desarrollados para Nodus.",
     "botName": "Asistente EfficiencIA",
     "status": "En línea · responde en segundos",
     "placeholder": "Escribe tu mensaje…",
     "cases": [
       {
-        "title": "Atención al cliente 24/7",
-        "desc": "Responde preguntas frecuentes, consulta pedidos y deriva a una persona cuando hace falta.",
-        "tagA": "[Cliente]",
-        "tagB": "[Canal]",
-        "msgs": [
-          {
-            "from": "b",
-            "text": "Hola, soy el asistente de [Cliente]. ¿En qué te ayudo hoy?"
-          },
-          {
-            "from": "u",
-            "text": "¿Dónde está mi pedido?"
-          },
-          {
-            "from": "b",
-            "text": "Claro. ¿Me compartes tu número de pedido?"
-          },
-          {
-            "from": "u",
-            "text": "#12345"
-          },
-          {
-            "from": "b",
-            "text": "Tu pedido salió hoy y llega mañana. ¿Quieres que te avise cuando esté en camino?"
-          }
-        ]
+        "title": "Captive Center",
+        "desc": "Marketplace inmobiliario que conecta a pymes y startups que buscan nave industrial, oficina o local comercial con propietarios y brokers, a nivel nacional e internacional. Incluye búsqueda con mapa y filtros, publicación de espacios con aprobación previa y seguimiento de prospectos.",
+        "tagA": "Nodus",
+        "tagB": "Plataforma web",
+        "img": "/proyectos/captive.jpg",
+        "imgAlt": "Página de inicio de Captive Center"
       },
       {
-        "title": "Calificación de leads",
-        "desc": "Hace las preguntas correctas, clasifica al prospecto y agenda una llamada con ventas.",
-        "tagA": "[Cliente]",
-        "tagB": "[Canal]",
+        "title": "Asistente virtual de Nodus Flex Center",
+        "desc": "Asistente con IA en WhatsApp, con el mismo número en todas las redes sociales de la empresa. Atiende a los interesados, resuelve sus dudas sobre oficinas y espacios de trabajo, y los registra como prospectos. Hoy es el canal por el que llegan los nuevos clientes.",
+        "tagA": "Nodus Flex Center",
+        "tagB": "Chatbot en WhatsApp",
+        "botName": "NodusBot",
+        "status": "WhatsApp · responde en segundos",
         "msgs": [
           {
             "from": "b",
-            "text": "¡Hola! Cuéntame, ¿qué proceso te gustaría automatizar?"
+            "text": "¡Hola! Soy el asistente de Nodus Flex Center. ¿Buscas oficina privada, coworking o sala de juntas?"
           },
           {
             "from": "u",
-            "text": "Nuestra facturación manual"
+            "text": "Una oficina para 4 personas"
           },
           {
             "from": "b",
-            "text": "Entendido. ¿Cuántas facturas emiten al mes, aproximadamente?"
+            "text": "Tenemos oficinas privadas listas para trabajar. ¿Para cuándo la necesitas?"
           },
           {
             "from": "u",
-            "text": "Unas 300"
+            "text": "Para el próximo mes"
           },
           {
             "from": "b",
-            "text": "Perfecto. Puedo agendarte una auditoría gratuita con un experto. ¿Prefieres mañana o el jueves?"
+            "text": "Listo, ya registré tus datos. Un asesor te contactará para agendar un recorrido por el centro."
           }
-        ]
+        ],
+        "avatar": "/proyectos/nodusbot.png"
       },
       {
-        "title": "Asistente interno",
-        "desc": "Resuelve dudas del equipo sobre políticas, procesos y herramientas, con respuestas al instante.",
-        "tagA": "[Cliente]",
-        "tagB": "[Canal]",
-        "msgs": [
-          {
-            "from": "u",
-            "text": "¿Cómo solicito vacaciones?"
-          },
-          {
-            "from": "b",
-            "text": "Entra al portal de RR. HH. y elige \"Nueva solicitud\". Tu jefe la aprueba en un día hábil."
-          },
-          {
-            "from": "u",
-            "text": "¿Y cuántos días me quedan?"
-          },
-          {
-            "from": "b",
-            "text": "Consulto tu saldo… ¿quieres que lo envíe también a tu correo?"
-          }
-        ]
+        "title": "App de Nodus Flex Center",
+        "desc": "Plataforma que centraliza la operación del centro de negocios: prospectos y cotizaciones, contratos, cobranza y facturación, reservación de salas, paquetería y soporte. Además, cada cliente tiene su propio portal para consultar su estado de cuenta, pagar y reservar en línea.",
+        "tagA": "Nodus Flex Center",
+        "tagB": "Sistema de gestión",
+        "img": "/proyectos/nodus-app.jpg",
+        "imgAlt": "Panel de la app de Nodus Flex Center"
       }
     ]
   },
@@ -158,6 +126,32 @@
     "step2Desc": "Diseñamos y construimos soluciones personalizadas que se integran perfectamente con tus sistemas existentes.",
     "step3Title": "Despliegue y Optimización",
     "step3Desc": "Implementamos, monitorizamos y optimizamos continuamente para garantizar resultados crecientes."
+  },
+  "about": {
+    "label": "NOSOTROS",
+    "title": "Automatización con inteligencia artificial, a la medida de tu operación",
+    "description": "EfficiencIA nace en 2025 con un objetivo claro: ayudar a las empresas a trabajar de forma más eficiente con inteligencia artificial. Somos una empresa joven en el mercado, pero con proyectos reales en operación: desde plataformas web y asistentes virtuales que atraen y atienden a nuevos clientes, hasta sistemas completos para administrar un negocio de punta a punta.",
+    "facts": [
+      {
+        "value": "2025",
+        "label": "Año en que comenzamos a automatizar procesos con IA."
+      },
+      {
+        "value": "3 proyectos",
+        "label": "En producción y en uso todos los días."
+      },
+      {
+        "value": "A la medida",
+        "label": "Cada solución se diseña para la operación de tu empresa, sin plantillas genéricas."
+      }
+    ],
+    "toolsLabel": "TRABAJAMOS CON",
+    "tools": [
+      "WhatsApp",
+      "ManyChat",
+      "n8n",
+      "Supabase"
+    ]
   },
   "testimonials": {
     "label": "CLIENTES",
@@ -293,7 +287,8 @@
     "process": "Cómo funciona",
     "contact": "Contacto",
     "socialTitle": "SÍGUENOS",
-    "rights": "© {{year}} EfficiencIA. Todos los derechos reservados."
+    "rights": "© {{year}} EfficiencIA. Todos los derechos reservados.",
+    "about": "Nosotros"
   },
   "privacyPage": {
     "metaTitle": "Aviso de privacidad | EfficiencIA",
