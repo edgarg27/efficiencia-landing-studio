@@ -5,9 +5,9 @@ import { z } from 'zod';
 // Plan elegido en la web: el servidor lo traduce a un texto legible para n8n.
 // Mantén estos precios sincronizados con src/lib/plans.ts.
 const PLANES = {
-    responde: { monthly: "Responde — $1,490 MXN/mes + IVA", annual: "Responde — pago anual $14,900 MXN + IVA" },
-    agenda: { monthly: "Agenda — $2,490 MXN/mes + IVA", annual: "Agenda — pago anual $24,900 MXN + IVA" },
-    vende: { monthly: "Vende — $3,990 MXN/mes + IVA", annual: "Vende — pago anual $39,900 MXN + IVA" },
+    responde: { monthly: "Básico — $1,490 MXN/mes + IVA", annual: "Básico — pago anual $14,900 MXN + IVA" },
+    agenda: { monthly: "Pro — $2,490 MXN/mes + IVA", annual: "Pro — pago anual $24,900 MXN + IVA" },
+    vende: { monthly: "VIP — $3,990 MXN/mes + IVA", annual: "VIP — pago anual $39,900 MXN + IVA" },
 };
 
 const contactSchema = z.object({
