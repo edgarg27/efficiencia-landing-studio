@@ -44,13 +44,14 @@ Tu workflow de n8n
 }
 ```
 
-Si el solicitante marca que **no** es una empresa, el payload no incluye `email` ni `company`; trae solo el título del proyecto (opcional):
+Si el solicitante marca que **no** es una empresa, el payload conserva `email` pero no incluye `company`; puede traer el título del proyecto (opcional):
 
 ```json
 {
   "type": "individual",
   "name": "Ana López",
   "number": "5512345678",
+  "email": "ana@correo.com",
   "message": "Quiero ordenar mis cotizaciones...",
   "project": "Cotizador automático"
 }
@@ -63,7 +64,7 @@ Si el solicitante marca que **no** es una empresa, el payload no incluye `email`
 | `name` | string | 1–100 caracteres, se recorta espacios (`trim`) | Sí |
 | `number` | string | exactamente 10 dígitos, solo números (regex `^\d+$`) — sin espacios, guiones ni lada/código de país | Sí |
 | `type` | string | `company` o `individual` (el solicitante indica si es para una empresa) | Sí |
-| `email` | string | formato de email válido, máx. 255 caracteres | **Solo si `type` = `company`** (no se envía si es `individual`) |
+| `email` | string | formato de email válido, máx. 255 caracteres (corporativo si `type` = `company`; personal si es `individual`) | Sí |
 | `company` | string | 1–100 caracteres | **Solo si `type` = `company`** (obligatorio en ese caso) |
 | `project` | string | máx. 150 caracteres | **No** — solo si `type` = `individual` y escribió un título |
 | `message` | string | 1–1000 caracteres, se recorta espacios | Sí |
@@ -71,7 +72,7 @@ Si el solicitante marca que **no** es una empresa, el payload no incluye `email`
 
 Notas para diseñar el workflow:
 - `plan` es **opcional**: solo existe si el usuario eligió un plan en la sección de planes o en el formulario. Si cambias los precios en `src/lib/plans.ts`, actualiza también el mapa `PLANES` de `api/webhook.js`.
-- `email` y `company` ya **no son siempre obligatorios**: dependen de `type`. Para `individual` no existen; el workflow debe contactar por teléfono (`number`) y no asumir que hay correo.
+- `company` solo existe si `type` = `company`; `project` solo si es `individual`. `email` viene siempre.
 - `number` siempre son 10 dígitos limpios (el frontend ya filtra cualquier caracter no numérico antes de enviarlo), así que no hace falta volver a limpiarlo en n8n, pero sí conviene no asumir un formato de lada específico (México, EE.UU., etc.) si tu workflow lo va a usar para marcar/enviar WhatsApp.
 - `captchaToken` **nunca llega a n8n** — se consume y se descarta en `/api/webhook` antes de reenviar.
 - No hay ningún campo de identificación de origen (IP, user-agent, timestamp) en el payload actual. Si tu workflow necesita alguno de esos, hay que agregarlo explícitamente en `api/webhook.js` (avísame si lo necesitas).

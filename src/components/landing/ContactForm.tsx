@@ -93,11 +93,9 @@ const ContactForm = () => {
         if (!next[key]) next[key] = issue.message;
       }
     }
-    // Empresa: correo corporativo y nombre de la empresa son obligatorios.
-    if (values.type === "company") {
-      if (!z.string().email().safeParse(values.email.trim()).success) next.email = t("form.errors.emailInvalid");
-      if (!values.company.trim()) next.company = t("form.errors.companyRequired");
-    }
+    // El correo es obligatorio para todos; el nombre de la empresa, solo si es empresa.
+    if (!z.string().email().safeParse(values.email.trim()).success) next.email = t("form.errors.emailInvalid");
+    if (values.type === "company" && !values.company.trim()) next.company = t("form.errors.companyRequired");
     if (!parsed.success || Object.keys(next).length > 0) {
       setErrors(next);
       setShowCaptcha(true);
@@ -106,11 +104,11 @@ const ContactForm = () => {
 
     const d = parsed.data;
     const base = { type: d.type, name: d.name, number: d.number, message: d.message, captchaToken: d.captchaToken, ...(plan ? { plan } : {}) };
-    // Empresa: se envía correo y empresa. Personal: solo el título del proyecto (si lo hay).
+    // Todos envían correo. Empresa: además el nombre de la empresa. Personal: el título del proyecto (si lo hay).
     const payload =
       d.type === "company"
         ? { ...base, email: d.email, company: d.company }
-        : { ...base, ...(d.project ? { project: d.project } : {}) };
+        : { ...base, email: d.email, ...(d.project ? { project: d.project } : {}) };
 
     setLoading(true);
     setFailed(false);
@@ -169,25 +167,25 @@ const ContactForm = () => {
           ))}
         </div>
       </fieldset>
-      {values.type === "company" ? (
-        <div key="company" className="fx-in" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,200px),1fr))", gap: "18px" }}>
-          <div>
-            <label className="lbl" htmlFor="f-mail">{t("form.email")}</label>
-            <input className="field" id="f-mail" name="mail" type="email" autoComplete="email" required maxLength={255} value={values.email} onChange={(e) => set("email")(e.target.value)} aria-invalid={!!errors.email} />
-            {errors.email && <p style={errStyle}>{errors.email}</p>}
-          </div>
+      <div key={values.type} className="fx-in" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,200px),1fr))", gap: "18px" }}>
+        <div>
+          <label className="lbl" htmlFor="f-mail">{values.type === "company" ? t("form.email") : t("form.emailPersonal")}</label>
+          <input className="field" id="f-mail" name="mail" type="email" autoComplete="email" required maxLength={255} value={values.email} onChange={(e) => set("email")(e.target.value)} aria-invalid={!!errors.email} />
+          {errors.email && <p style={errStyle}>{errors.email}</p>}
+        </div>
+        {values.type === "company" ? (
           <div>
             <label className="lbl" htmlFor="f-emp">{t("form.company")}</label>
             <input className="field" id="f-emp" name="empresa" type="text" autoComplete="organization" required maxLength={100} value={values.company} onChange={(e) => set("company")(e.target.value)} aria-invalid={!!errors.company} />
             {errors.company && <p style={errStyle}>{errors.company}</p>}
           </div>
-        </div>
-      ) : (
-        <div key="individual" className="fx-in">
-          <label className="lbl" htmlFor="f-proj">{t("form.project")}</label>
-          <input className="field" id="f-proj" name="proyecto" type="text" maxLength={150} value={values.project} onChange={(e) => set("project")(e.target.value)} />
-        </div>
-      )}
+        ) : (
+          <div>
+            <label className="lbl" htmlFor="f-proj">{t("form.project")}</label>
+            <input className="field" id="f-proj" name="proyecto" type="text" maxLength={150} value={values.project} onChange={(e) => set("project")(e.target.value)} />
+          </div>
+        )}
+      </div>
       <div>
         <label className="lbl" htmlFor="f-plan">{t("form.plan")}</label>
         <select

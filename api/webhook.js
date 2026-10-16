@@ -14,7 +14,7 @@ const contactSchema = z.object({
     type: z.enum(['company', 'individual']),
     name: z.string().trim().min(1).max(100),
     number: z.string().regex(/^\d+$/).length(10),
-    email: z.string().trim().email().max(255).optional(),
+    email: z.string().trim().email().max(255),
     company: z.string().trim().min(1).max(100).optional(),
     project: z.string().trim().max(150).optional(),
     message: z.string().trim().min(1).max(1000),
@@ -25,10 +25,10 @@ const contactSchema = z.object({
     const deny = (k) => { if (v[k] !== undefined) ctx.addIssue({ code: 'custom', path: [k], message: 'not allowed' }); };
     if (v.type === 'company') {
         // Empresa: correo corporativo y nombre de la empresa obligatorios.
-        need('email'); need('company'); deny('project');
+        need('company'); deny('project');
     } else {
-        // Personal: solo el título del proyecto (opcional).
-        deny('email'); deny('company');
+        // Personal: correo y, opcional, el título del proyecto (sin nombre de empresa).
+        deny('company');
     }
 });
 

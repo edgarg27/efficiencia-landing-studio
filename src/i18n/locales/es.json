@@ -235,7 +235,8 @@
     "isCompany": "¿Es para una empresa?",
     "typeCompany": "Sí, es una empresa",
     "typeIndividual": "No, es personal",
-    "project": "Título del proyecto (opcional)"
+    "project": "Título del proyecto (opcional)",
+    "emailPersonal": "Correo electrónico"
   },
   "cta": {
     "title": "¿Listo para transformar el flujo de trabajo de tu empresa?",

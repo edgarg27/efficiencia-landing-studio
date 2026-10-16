@@ -235,7 +235,8 @@
     "isCompany": "Is this for a company?",
     "typeCompany": "Yes, a company",
     "typeIndividual": "No, it's personal",
-    "project": "Project title (optional)"
+    "project": "Project title (optional)",
+    "emailPersonal": "Email"
   },
   "cta": {
     "title": "Ready to transform your company's workflow?",
