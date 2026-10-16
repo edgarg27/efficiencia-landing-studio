@@ -217,6 +217,7 @@
     "submit": "Request a free consultation",
     "sending": "Sending...",
     "privacy": "Your data is safe. Zero spam.",
+    "privacyLink": "Privacy notice",
     "failed": "We couldn't send your request. Please try again later.",
     "successTitle": "Received!",
     "successMessage": "An EfficiencIA expert will contact you soon to schedule your audit.",
@@ -246,6 +247,67 @@
     "contact": "Contact",
     "socialTitle": "FOLLOW US",
     "rights": "© {{year}} EfficiencIA. All rights reserved."
+  },
+  "privacyPage": {
+    "metaTitle": "Privacy notice | EfficiencIA",
+    "title": "Privacy notice",
+    "updated": "Last updated: October 16, 2026",
+    "back": "Back to home",
+    "sections": [
+      {
+        "h": "1. Data controller",
+        "p": [
+          "EfficiencIA is responsible for processing the personal data you provide through this website, in accordance with Mexico's Federal Law on the Protection of Personal Data Held by Private Parties (LFPDPPP).",
+          "For any privacy matter you can write to us at efficiencia22@gmail.com."
+        ]
+      },
+      {
+        "h": "2. Personal data we collect",
+        "p": [
+          "When you submit the contact form we collect: name, phone number, email, company (optional), plan of interest (optional) and the message you write.",
+          "We do not request sensitive personal data. Please do not include it in your message."
+        ]
+      },
+      {
+        "h": "3. Purposes",
+        "p": [
+          "We use your data to answer your request, schedule the free audit, send you a proposal and follow up on your inquiry.",
+          "We do not use your data for third-party advertising and we do not sell it."
+        ]
+      },
+      {
+        "h": "4. Who we share your data with",
+        "p": [
+          "Your data is processed in our automation and web hosting systems, which act as service providers. Beyond that, we do not transfer it to third parties without your consent, unless required by law."
+        ]
+      },
+      {
+        "h": "5. reCAPTCHA, fonts and local storage",
+        "p": [
+          "This site uses Google reCAPTCHA to protect against spam. Google may receive your IP address and browser data and set cookies; its use is governed by Google's Privacy Policy and Terms of Service.",
+          "Typefaces are loaded from Google Fonts, which also involves sending your IP address to Google.",
+          "We only store your language preference in your browser (localStorage). We do not use first-party cookies or analytics tools."
+        ]
+      },
+      {
+        "h": "6. Retention",
+        "p": [
+          "We keep your data for as long as needed to handle your request and the resulting business relationship, and then delete or block it as required by law."
+        ]
+      },
+      {
+        "h": "7. ARCO rights and withdrawal of consent",
+        "p": [
+          "You may exercise your rights of access, rectification, cancellation and objection, withdraw your consent or limit the use of your data by emailing efficiencia22@gmail.com with your name, the right you wish to exercise and the data concerned. We will reply within the legal deadlines."
+        ]
+      },
+      {
+        "h": "8. Changes to this notice",
+        "p": [
+          "If this notice changes, we will publish the updated version on this page and update the last-updated date."
+        ]
+      }
+    ]
   },
   "notFound": {
     "code": "ERROR 404",

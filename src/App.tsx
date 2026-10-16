@@ -2,6 +2,7 @@ import { Component, Suspense, lazy, type ReactNode } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const Index = lazy(() => import("./pages/Index"));
+const Privacy = lazy(() => import("./pages/Privacy"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Evita la pantalla en blanco si falla la carga de un chunk (p. ej. justo después de un despliegue).
@@ -28,6 +29,7 @@ const App = () => (
       <Suspense fallback={null}>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/privacidad" element={<Privacy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -188,7 +188,7 @@ const ContactForm = () => {
           {t("form.failed")}
         </p>
       )}
-      <p style={{ margin: "0", textAlign: "center", fontSize: "13px", color: "#47566B" }}>{t("form.privacy")}</p>
+      <p style={{ margin: "0", textAlign: "center", fontSize: "13px", color: "#47566B" }}>{t("form.privacy")} <a className="lnk" href="/privacidad" style={{ textDecoration: "underline" }}>{t("form.privacyLink")}</a></p>
     </form>
   );
 };

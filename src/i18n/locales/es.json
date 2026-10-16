@@ -217,6 +217,7 @@
     "submit": "Solicitar asesoría gratuita",
     "sending": "Enviando...",
     "privacy": "Tus datos están seguros. Cero spam.",
+    "privacyLink": "Aviso de privacidad",
     "failed": "No pudimos enviar tu solicitud. Por favor, intenta de nuevo más tarde.",
     "successTitle": "¡Recibido!",
     "successMessage": "Un experto de EfficiencIA te contactará pronto para agendar tu auditoría.",
@@ -246,6 +247,67 @@
     "contact": "Contacto",
     "socialTitle": "SÍGUENOS",
     "rights": "© {{year}} EfficiencIA. Todos los derechos reservados."
+  },
+  "privacyPage": {
+    "metaTitle": "Aviso de privacidad | EfficiencIA",
+    "title": "Aviso de privacidad",
+    "updated": "Última actualización: 16 de octubre de 2026",
+    "back": "Volver al inicio",
+    "sections": [
+      {
+        "h": "1. Responsable del tratamiento",
+        "p": [
+          "EfficiencIA es responsable del tratamiento de los datos personales que nos proporcionas a través de este sitio web, de conformidad con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP).",
+          "Para cualquier asunto de privacidad puedes escribirnos a efficiencia22@gmail.com."
+        ]
+      },
+      {
+        "h": "2. Datos personales que recabamos",
+        "p": [
+          "Cuando envías el formulario de contacto recabamos: nombre, teléfono, correo electrónico, empresa (opcional), plan de interés (opcional) y el mensaje que escribas.",
+          "No solicitamos datos personales sensibles. Te pedimos que no los incluyas en el mensaje."
+        ]
+      },
+      {
+        "h": "3. Finalidades",
+        "p": [
+          "Usamos tus datos para responder tu solicitud, agendar la auditoría gratuita, enviarte una propuesta y dar seguimiento comercial a tu consulta.",
+          "No usamos tus datos para fines publicitarios de terceros ni los vendemos."
+        ]
+      },
+      {
+        "h": "4. Con quién compartimos tus datos",
+        "p": [
+          "Tus datos se procesan en nuestros sistemas de automatización y de alojamiento web, que operan como proveedores de servicios. Fuera de eso, no los transferimos a terceros sin tu consentimiento, salvo que la ley lo exija."
+        ]
+      },
+      {
+        "h": "5. reCAPTCHA, fuentes y almacenamiento local",
+        "p": [
+          "Este sitio usa Google reCAPTCHA para protegerse del spam. Google puede recibir tu dirección IP y datos del navegador y colocar cookies; su uso se rige por la Política de Privacidad y los Términos de Servicio de Google.",
+          "Las fuentes tipográficas se cargan desde Google Fonts, lo que también implica enviar tu dirección IP a Google.",
+          "Guardamos en tu navegador (localStorage) únicamente tu preferencia de idioma. No usamos cookies propias ni herramientas de analítica."
+        ]
+      },
+      {
+        "h": "6. Conservación",
+        "p": [
+          "Conservamos tus datos el tiempo necesario para atender tu solicitud y la relación comercial derivada de ella, y después los eliminamos o bloqueamos conforme a la ley."
+        ]
+      },
+      {
+        "h": "7. Derechos ARCO y revocación",
+        "p": [
+          "Puedes ejercer tus derechos de acceso, rectificación, cancelación y oposición, así como revocar tu consentimiento o limitar el uso de tus datos, enviando un correo a efficiencia22@gmail.com con tu nombre, el derecho que deseas ejercer y los datos a los que se refiere. Te responderemos en los plazos que marca la ley."
+        ]
+      },
+      {
+        "h": "8. Cambios a este aviso",
+        "p": [
+          "Si este aviso cambia, publicaremos la versión actualizada en esta misma página y modificaremos la fecha de última actualización."
+        ]
+      }
+    ]
   },
   "notFound": {
     "code": "ERROR 404",
