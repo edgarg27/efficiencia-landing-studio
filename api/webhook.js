@@ -11,14 +11,26 @@ const PLANES = {
 };
 
 const contactSchema = z.object({
+    type: z.enum(['company', 'individual']),
     name: z.string().trim().min(1).max(100),
     number: z.string().regex(/^\d+$/).length(10),
-    email: z.string().trim().email().max(255),
-    company: z.string().trim().max(100).optional(),
+    email: z.string().trim().email().max(255).optional(),
+    company: z.string().trim().min(1).max(100).optional(),
+    project: z.string().trim().max(150).optional(),
     message: z.string().trim().min(1).max(1000),
     captchaToken: z.string().min(1).max(4096),
     plan: z.enum(["starter", "growth", "enterprise"]).optional(),
-}).strict();
+}).strict().superRefine((v, ctx) => {
+    const need = (k) => { if (!v[k]) ctx.addIssue({ code: 'custom', path: [k], message: 'required' }); };
+    const deny = (k) => { if (v[k] !== undefined) ctx.addIssue({ code: 'custom', path: [k], message: 'not allowed' }); };
+    if (v.type === 'company') {
+        // Empresa: correo corporativo y nombre de la empresa obligatorios.
+        need('email'); need('company'); deny('project');
+    } else {
+        // Personal: solo el título del proyecto (opcional).
+        deny('email'); deny('company');
+    }
+});
 
 // Logs estructurados y sin datos personales (solo nombres de campo / códigos).
 const log = (level, event, data = {}) => console[level](JSON.stringify({ event, ...data }));
