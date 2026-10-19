@@ -113,7 +113,9 @@ div[aria-hidden="true"]{pointer-events:none}
 .cnt .ph{display:inline}
 @media (prefers-reduced-motion:reduce){.btn-p::before,.prog{animation:none;display:none}}
 @media (max-width:760px){.nav .lnk{display:none}.hide-s{display:none!important}}
-.nav a.lnk.blk{display:block!important}
+.nav a.lnk.blk{display:block!important;width:fit-content}
+/* Enlaces del pie: el subrayado del hover mide lo que el texto y queda pegado a él */
+.nav a.lnk.blk::after{bottom:-1px}
 
 /* Selector de idioma (ES | EN) */
 .lang{display:inline-flex;border:1px solid #E1E7EF;border-radius:12px;overflow:hidden;background:#fff}
