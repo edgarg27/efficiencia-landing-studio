@@ -18,7 +18,7 @@ const Footer = () => {
   </nav>
   <div>
    <p style={{ margin: "0 0 14px", fontSize: "12px", fontWeight: "700", letterSpacing: ".1em" }}>{t("footer.socialTitle")}</p>
-   <div className="nav" style={{ display: "grid", gap: "10px", fontSize: "14px", color: "#47566B" }}><a className="lnk blk" href="https://www.tiktok.com/@efficiencia?_r=1&_t=ZS-94ZvlwjmtvO" target="_blank" rel="noopener noreferrer">TikTok</a><a className="lnk blk" href="https://www.instagram.com/efficiencia22/" target="_blank" rel="noopener noreferrer">Instagram</a><a className="lnk blk" href="https://www.facebook.com/profile.php?id=61587188300318" target="_blank" rel="noopener noreferrer">Facebook</a></div>
+   <div className="nav" style={{ display: "grid", gap: "10px", fontSize: "14px", color: "#47566B" }}><a className="lnk blk" href="https://www.tiktok.com/@efficiencia" target="_blank" rel="noopener noreferrer">TikTok</a><a className="lnk blk" href="https://www.instagram.com/efficiencia22/" target="_blank" rel="noopener noreferrer">Instagram</a><a className="lnk blk" href="https://www.facebook.com/people/Efficiencia/61587188300318/" target="_blank" rel="noopener noreferrer">Facebook</a></div>
   </div>
  </div>
  <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px 32px", fontSize: "13px", color: "#47566B" }}>{t("footer.rights", { year: new Date().getFullYear() })} · <a className="lnk" href="/privacidad">{t("form.privacyLink")}</a></div>
