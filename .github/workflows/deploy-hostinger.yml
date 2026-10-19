@@ -1,0 +1,77 @@
+# Publica la landing en el hosting compartido de Hostinger (efficiencia.cloud).
+# En cada PR: prueba y compila. En cada push a main además sube. Pasos: prueba, compila, agrega el webhook PHP y el .htaccess y sube dist/ por FTP.
+# Configuración (Settings → Secrets and variables → Actions), ver hostinger/README.md:
+#   Secrets:   FTP_SERVER, FTP_USERNAME, FTP_PASSWORD, RECAPTCHA_SECRET_KEY, N8N_WEBHOOK_URL, N8N_WEBHOOK_SECRET
+#   Variables: VITE_RECAPTCHA_SITE_KEY, RECAPTCHA_HOSTNAMES, FTP_SERVER_DIR (opcional), FTP_PROTOCOL (opcional)
+name: Deploy a Hostinger
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-hostinger-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      FTP_SERVER: ${{ secrets.FTP_SERVER }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm test
+
+      - name: Compilar
+        run: npm run build
+        env:
+          VITE_RECAPTCHA_SITE_KEY: ${{ vars.VITE_RECAPTCHA_SITE_KEY }}
+
+      - name: Probar el webhook PHP
+        run: |
+          php -l hostinger/api/webhook.php
+          bash hostinger/smoke-test.sh
+
+      - name: Agregar webhook PHP, .htaccess y configuración
+        run: |
+          cp -r hostinger/. dist/
+          rm -f dist/README.md dist/smoke-test.sh
+          php -r 'echo "<?php\n// Generado por la GitHub Action. No editar a mano.\nreturn " . var_export([
+            "RECAPTCHA_SECRET_KEY" => (string) getenv("RECAPTCHA_SECRET_KEY"),
+            "N8N_WEBHOOK_URL" => (string) getenv("N8N_WEBHOOK_URL"),
+            "N8N_WEBHOOK_SECRET" => (string) getenv("N8N_WEBHOOK_SECRET"),
+            "RECAPTCHA_HOSTNAMES" => (string) getenv("RECAPTCHA_HOSTNAMES"),
+          ], true) . ";\n";' > dist/api/_config.php
+        env:
+          RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
+          N8N_WEBHOOK_URL: ${{ secrets.N8N_WEBHOOK_URL }}
+          N8N_WEBHOOK_SECRET: ${{ secrets.N8N_WEBHOOK_SECRET }}
+          RECAPTCHA_HOSTNAMES: ${{ vars.RECAPTCHA_HOSTNAMES }}
+
+      # En los PR solo se prueba y compila; se sube únicamente desde main.
+      - name: Aviso si falta el FTP
+        if: github.event_name != 'pull_request' && env.FTP_SERVER == ''
+        run: echo "::warning::Falta el secreto FTP_SERVER; se compiló pero no se subió nada. Ver hostinger/README.md."
+
+      - name: Subir a Hostinger por FTP
+        if: github.event_name != 'pull_request' && env.FTP_SERVER != ''
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ${{ vars.FTP_PROTOCOL || 'ftps' }}
+          local-dir: ./dist/
+          server-dir: ${{ vars.FTP_SERVER_DIR || 'public_html/' }}

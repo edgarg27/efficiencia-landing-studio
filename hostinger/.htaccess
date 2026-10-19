@@ -1,0 +1,52 @@
+# Equivalente de vercel.json para el hosting compartido de Hostinger (Apache/LiteSpeed).
+# La GitHub Action lo copia a la raíz de public_html junto con el build.
+
+Options -Indexes
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Siempre HTTPS (también detrás del CDN de Hostinger, que avisa con X-Forwarded-Proto).
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteRule ^ https://efficiencia.cloud%{REQUEST_URI} [L,R=301]
+
+  # Sin www.
+  RewriteCond %{HTTP_HOST} ^www\. [NC]
+  RewriteRule ^ https://efficiencia.cloud%{REQUEST_URI} [L,R=301]
+
+  # El formulario llama a /api/webhook (igual que en Vercel): lo atiende el PHP.
+  RewriteRule ^api/webhook/?$ api/webhook.php [L]
+
+  # Nunca servir la configuración con secretos ni archivos ocultos.
+  RewriteRule (^|/)_config\.php$ - [F,L]
+  RewriteRule (^|/)\.(?!well-known/) - [F,L]
+
+  # SPA: todo lo que no sea un archivo real ni /api/ lo resuelve React Router.
+  RewriteCond %{REQUEST_URI} !^/api/
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set X-Frame-Options "DENY"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+  Header always set Content-Security-Policy "default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/; frame-src https://www.google.com/recaptcha/ https://recaptcha.google.com/recaptcha/; connect-src 'self' https://www.google.com/recaptcha/; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+
+  # JS y CSS salen de Vite con hash en el nombre: se pueden cachear un año.
+  <FilesMatch "\.(js|css)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.(png|jpe?g|svg|ico|webp|woff2?)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
