@@ -13,7 +13,7 @@ const ContactSection = () => {
    <p style={{ margin: "18px 0 0", fontSize: "17px", lineHeight: "1.6", color: "#47566B", maxWidth: "460px" }}>{t("contact.description")}</p>
    <div style={{ marginTop: "28px", display: "flex", alignItems: "center", gap: "10px", color: "#47566B", fontSize: "14px" }}>
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#087A55" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-    <a href="mailto:efficiencia22@gmail.com" style={{ fontWeight: "600", color: "#121821" }}>efficiencia22@gmail.com</a>
+    <a href="mailto:ventas@efficiencia.cloud" style={{ fontWeight: "600", color: "#121821" }}>ventas@efficiencia.cloud</a>
    </div>
   </div>
   <div className="rv2" style={{ padding: "32px", borderRadius: "20px", border: "1px solid #E1E7EF", background: "#fff", boxShadow: "0 30px 60px -40px rgba(18,24,33,.3)" }}>
